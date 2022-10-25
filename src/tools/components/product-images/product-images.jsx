@@ -1,5 +1,5 @@
 import { PureComponent } from "react";
-import s from "./ProductImages.module.css";
+import s from "./product-images.module.css";
 
 class ProductImages extends PureComponent {
   render() {
@@ -8,7 +8,7 @@ class ProductImages extends PureComponent {
       <div className={s.imagesSection}>
         <ul className={s.imagesList}>
           {product &&
-            product.gallery.map((image) => {
+            product.gallery?.map((image) => {
               return (
                 <li
                   onClick={onSelectImage}
@@ -22,8 +22,8 @@ class ProductImages extends PureComponent {
         </ul>
         <img
           className={s.selectedImage}
-          src={!selectImage ? product.gallery[0] : selectImage}
-          alt={!selectImage ? product.gallery[0] : selectImage}
+          src={!selectImage && product.gallery ? product.gallery[0] : selectImage}
+          alt={!selectImage && product.gallery ? product.gallery[0] : selectImage}
         />
       </div>
     );

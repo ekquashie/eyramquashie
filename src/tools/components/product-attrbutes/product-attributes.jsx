@@ -1,24 +1,24 @@
-import { PureComponent } from "react";
+import { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
-import s from "./ProductAttributes.module.css";
+import s from "./product-attributes.module.css";
 
-class ProductAttributes extends PureComponent {
+class ProductAttributes extends Component {
   state = {
     color: "",
     size: "",
     capacity: "",
-    wihtPorts: "",
-    wihtTouch: "",
+    withPorts: "",
+    withTouch: "",
     attrs: [],
   };
-  //no idea how i can make it correctly
 
   componentDidUpdate() {
-    const { color, size, capacity, wihtPorts, wihtTouch } = this.state;
+    const { color, size, capacity, withPorts, withTouch } = this.state;
 
     const onAttributesClick = this.props.onAttributesClick;
-    onAttributesClick([color, size, capacity, wihtPorts, wihtTouch]);
+    onAttributesClick([color, size, capacity, withPorts, withTouch]);
   }
+
   attrs = (e) => {
     const { name, value } = e.target;
 
@@ -32,29 +32,29 @@ class ProductAttributes extends PureComponent {
       this.setState({ capacity: value });
     }
     if (name === "With USB 3 ports") {
-      this.setState({ wihtPorts: value });
+      this.setState({ withPorts: value });
     }
     if (name === "Touch ID in keyboard") {
-      this.setState({ wihtTouch: value });
+      this.setState({ withTouch: value });
     }
   };
 
   render() {
     const { inStock, attributes } = this.props.product;
-    return attributes.map((attr) => {
+    return attributes?.map((attr) => {
       return (
         <div key={attr.name} className={s.attributes}>
           <h2 className={s.attributesTitle}>{attr.name.toUpperCase()}:</h2>
           <div className={s.attributesList}>
             {attr.items.map((item) => {
-              item.key = uuidv4();
+              const key = uuidv4();
 
               return (
                 <div key={item.value} className={s.attributesForm}>
                   <input
-                    onChange={this.attrs}
+                    onChange={(e) => this.attrs(e)}
                     className={s.attrButton}
-                    id={item.key}
+                    id={key}
                     type="radio"
                     name={attr.name}
                     value={item.value}
