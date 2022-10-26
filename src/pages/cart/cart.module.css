@@ -1,0 +1,24 @@
+.wrapper {
+  margin-top: 80px;
+  width: 1098px;
+  padding-left: 101px;
+}
+
+.list {
+  margin-bottom: 50px;
+}
+
+.pageTitle {
+  font-family: Raleway;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  margin-bottom: 60px;
+}
+
+.emptyMessage {
+  text-align: center;
+  font-family: Raleway;
+  font-size: 42px;
+  line-height: 160%;
+}

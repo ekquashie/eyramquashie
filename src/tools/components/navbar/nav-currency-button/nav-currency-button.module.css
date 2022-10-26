@@ -1,0 +1,45 @@
+.select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-family: Raleway, serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 250ms;
+}
+
+.select:hover {
+  transform: scale(1.06);
+}
+
+.options {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 114px;
+  background-color: #fff;
+  z-index: 10;
+  box-shadow: 0 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+.option {
+  padding: 10px 0;
+  font-family: Raleway, serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 160%;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 250ms;
+}
+
+.option:hover {
+  background-color: #eeeeee;
+}
