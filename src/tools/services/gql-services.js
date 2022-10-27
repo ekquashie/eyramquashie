@@ -74,7 +74,10 @@ const productAttributesRequest = (item) => client.query({
       gallery
       prices {
         amount
-        currency
+        currency {
+          label
+          symbol
+        }
       }
     }
   }

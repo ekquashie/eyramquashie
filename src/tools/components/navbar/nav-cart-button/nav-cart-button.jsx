@@ -30,7 +30,7 @@ class NavCartButton extends Component {
     }
     return (
       <>
-        <button type="button" onClick={this.onIconClick} className={s.buttton}>
+        <button type="button" onClick={this.onIconClick} className={s.button}>
           <CartIcon className={s.cartIcon} />
           {products.length > 0 && (
             <span className={s.productCount}>{products?.length}</span>

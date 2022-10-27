@@ -3,6 +3,10 @@ import Counter from "../../counter/counter";
 import s from "./nav-cart-item.module.css";
 
 export default class NavCartItem extends Component {
+  componentDidMount() {
+    console.log(this.props.product)
+  }
+
   render() {
     const { product, currencies, item } = this.props;
     return (
@@ -38,7 +42,7 @@ export default class NavCartItem extends Component {
           <Counter id={item.id} value={item.value} />
           <img
             className={s.itemImage}
-            src={product?.gallery[0]}
+            src={product?.gallery && product?.gallery[0]}
             alt={product.name}
           />
         </div>

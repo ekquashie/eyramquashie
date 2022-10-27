@@ -1,4 +1,4 @@
-.buttton {
+.button {
   position: relative;
   background-color: transparent;
   border: none;
@@ -21,6 +21,7 @@
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
+  cursor: pointer;
   color: #ffffff;
   background-color: #1d1f22;
   border-radius: 50%;

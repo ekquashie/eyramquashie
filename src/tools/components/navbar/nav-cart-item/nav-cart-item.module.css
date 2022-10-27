@@ -13,14 +13,14 @@
 }
 
 .itemName {
-  font-family: Raleway;
+  font-family: Raleway, serif;
   font-weight: 300;
   font-size: 16px;
   line-height: 160%;
 }
 
 .itemPrice {
-  font-family: Raleway;
+  font-family: Raleway, serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 160%;
@@ -35,7 +35,7 @@
   min-width: 24px;
   padding: 3px;
   height: 24px;
-  font-family: Source Sans Pro;
+  font-family: Source Sans Pro, serif;
   text-align: center;
   font-weight: 400;
   font-size: 14px;

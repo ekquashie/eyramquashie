@@ -1,10 +1,8 @@
 import {Component} from "react";
 import {createPortal} from "react-dom";
 import {connect} from "react-redux";
-import {v4 as uuidv4} from "uuid";
 import s from "./nav-cart-modal.module.css";
 import TotalCounter from "../../total-counter/total-counter";
-// import { productAttributesRequest } from "../../services/gql-requests";
 import NavCartItem from "../nav-cart-item/nav-cart-item";
 import ModalButtons from "../../modal-buttons/modal.buttons";
 import {productAttributesRequest} from "../../../services/gql-services";
@@ -15,6 +13,7 @@ class NavCartModal extends Component {
   state = {
     total: 0,
   };
+  s
 
   componentDidMount() {
     window.addEventListener("keydown", this.handleCloseModal);
@@ -39,18 +38,20 @@ class NavCartModal extends Component {
   render() {
     const {products, currencies, onCloseModal} = this.props;
 
-    return createPortal(<div className={s.Overlay} onClick={this.handleCloseModal}>
+    return createPortal(<div className={s.overlay} onClick={this.handleCloseModal}>
       <div
-        className={s.Modal}
+        className={s.modal}
         style={{overflowY: products.length > 3 && "scroll"}}
       >
         <p className={s.title}>
           My Bag,{" "}
-          <span className={s.totalItems}>{products.length} items</span>
+          <span
+            className={s.totalItems}>{(products.length && products.length > 1) ? `${products.length} items` : `${products.length} item`}</span>
         </p>
-        {products.map((item) => {
+        {products?.map((item, index) => {
           const product = this.getProductsAttributes(item.name);
-          return <NavCartItem
+          return product.name && <NavCartItem
+            key={index}
             product={product}
             currencies={currencies}
             item={item}

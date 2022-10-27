@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Link, Outlet} from "react-router-dom";
+import {Link, NavLink, Outlet} from "react-router-dom";
 import {URLS} from "../../../constants/route-links";
 import "./page-wrap.css";
 import logo from "../../../assets/imgs/logo.jpg";
@@ -31,17 +31,24 @@ export class PageWrap extends Component {
   }
 
   render() {
-    return (<div className="container">
+    return (<div>
       <nav className="navbar">
         <div className="menu-container">
           {this.state.categories.map((item, index) => {
-            return (<Link
+            return (<NavLink
               key={item.name}
               to={item.name}
               className="menu-item"
+              style={({ isActive }) =>
+              isActive ? {
+                color: "#5ece7b",
+                transform: "scaleX(1)"
+              } : undefined
+            }
+
             >
               {item.name}
-            </Link>);
+            </NavLink>);
           })}
         </div>
         <Link to={URLS.home.url}>
