@@ -16,14 +16,14 @@ class NavCurrencyButton extends Component {
     })
   }
 
-  onBtnClick = () => {
+  onButtonClick = () => {
     this.setState((prev) => {
       return {showModal: !prev.showModal};
     });
   };
 
-  selectCurrency = (e) => {
-    this.props.onChangeCurrency(e.target.id);
+  selectCurrency = (currency) => {
+    this.props.onChangeCurrency(currency.symbol);
     this.setState({
       showModal: false,
     });
@@ -32,8 +32,8 @@ class NavCurrencyButton extends Component {
   render() {
     const {showModal, currencies} = this.state;
     return (<div>
-      <button className={s.select} type="button" onClick={this.onBtnClick}>
-        {this.props.currencies} {showModal ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+      <button className={s.select} type="button" onClick={this.onButtonClick}>
+        {this.props.currencies} {showModal ? <MdKeyboardArrowUp/> : <MdKeyboardArrowDown/>}
       </button>
       {showModal && (<div className={s.options}>
         {currencies.map((currency, index) => {
@@ -41,7 +41,7 @@ class NavCurrencyButton extends Component {
             key={index}
             id={currency}
             className={s.option}
-            onClick={this.selectCurrency}
+            onClick={() => this.selectCurrency(currency)}
           >
             {currency.symbol + " " + currency.label}
           </button>);

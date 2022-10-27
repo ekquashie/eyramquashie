@@ -41,7 +41,7 @@ const initialState = {
 //   },
 // });
 
-const productSlice = createReducer(initialState.products.items, (builder) => {
+const productReducer = createReducer(initialState.products.items, (builder) => {
   builder.addCase(addProduct, (state, {payload}) => {
     return [...state, payload]
   });
@@ -64,12 +64,12 @@ const productSlice = createReducer(initialState.products.items, (builder) => {
   });
 });
 
-const currencyReducer = createReducer(initialState.products.currencies, {
-  [changeCurrency]: (_, {payload}) => payload,
+const currencyReducer = createReducer(initialState.products.currencies, (builder) => {
+  builder.addCase(changeCurrency, (_, {payload}) => payload);
 });
 
 const productsReducer = combineReducers({
-  items: productSlice, currencies: currencyReducer,
+  items: productReducer, currencies: currencyReducer,
 });
 
 export default productsReducer;
