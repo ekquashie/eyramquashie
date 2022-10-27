@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import CardButton from "../card-button/card-button";
 import {v4 as uuidv4} from "uuid";
-import {withRouter} from "../../withRouter";
+import {withRouter} from "../../libraries/withRouter";
 
 class ProductCard extends Component {
   onButtonRedirect = (item) => {
@@ -54,4 +54,6 @@ const mapDispatchToProps = (dispatch) => ({
   onSubmit: (product) => dispatch(addProduct(product)),
 });
 
+//withRouter not working in react-router v6
+//Had to create a custom withRouter components since hooks cannot be used in class based components
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductCard));

@@ -38,6 +38,7 @@ class ProductPage extends Component {
     const filtered = attrs.filter((attr) => attr !== "");
 
     this.setState({selectedAttribute: [...filtered]});
+    console.log(filtered)
   };
 
   onSubmitProduct = (e) => {
@@ -45,7 +46,7 @@ class ProductPage extends Component {
     const {selectedAttribute, productId} = this.state;
     const {onSubmit} = this.props;
     if (selectedAttribute.length < 1) {
-      alert("Please choose attributes");
+      alert("Please select an attribute");
     }
     if (selectedAttribute.length > 0) {
       onSubmit({
@@ -62,44 +63,44 @@ class ProductPage extends Component {
     if (this.state.loading) return <p>Loading...</p>;
 
     return (product && (<div className={s.wrapper}>
-          <ProductImages
-            product={product}
-            selectImage={selectImage}
-            onSelectImage={this.onSelectImage}
-          />
-          <div>
-            <h3 className={s.title}>{product.name}</h3>
-            <ProductAttributes
-              product={product}
-              onAttributesClick={() => this.setActiveAttribute}
-            />
+      <ProductImages
+        product={product}
+        selectImage={selectImage}
+        onSelectImage={this.onSelectImage}
+      />
+      <div>
+        <h3 className={s.title}>{product.name}</h3>
+        <ProductAttributes
+          product={product}
+          onAttributesClick={() => this.setActiveAttribute}
+        />
 
-            <p className={s.attributesTitle}>PRICE:</p>
-            <p className={s.price}>
-              {product.prices?.map((cur) => cur.currency === currency && `${cur.currency} ${cur.amount}`)}
-            </p>
-            <button
-              type="button"
-              onClick={this.onSubmitProduct}
-              disabled={!product.inStock && true}
-              className={s.submitBtn}
-            >
-              {!product.inStock ? "OUT OF STOCK" : "ADD TO CART"}
-            </button>
-            {product.description && (!isShowMore && product.description.length > 300 ? (<div className={s.description}>
-              {parse(product.description?.slice(0, 300) + "...")}
-            </div>) : (<div className={s.description}>
-              {parse(product?.description)}
-            </div>))}
-            {product.description?.length > 300 && (<button
-              className={s.showMoreBtn}
-              type="button"
-              onClick={this.onShowMore}
-            >
-              {!isShowMore ? "Show more" : "Hide"}
-            </button>)}
-          </div>
-        </div>));
+        <p className={s.attributesTitle}>PRICE:</p>
+        <p className={s.price}>
+          {product.prices?.map((cur) => cur.currency.symbol === currency && `${cur.currency.symbol} ${cur.amount}`)}
+        </p>
+        <button
+          type="button"
+          onClick={this.onSubmitProduct}
+          disabled={!product.inStock && true}
+          className={s.submitBtn}
+        >
+          {!product.inStock ? "OUT OF STOCK" : "ADD TO CART"}
+        </button>
+        {product.description && (!isShowMore && product.description.length > 300 ? (<div className={s.description}>
+          {parse(product.description?.slice(0, 300) + "...")}
+        </div>) : (<div className={s.description}>
+          {parse(product?.description)}
+        </div>))}
+        {product.description?.length > 300 && (<button
+          className={s.showMoreBtn}
+          type="button"
+          onClick={this.onShowMore}
+        >
+          {!isShowMore ? "Show more" : "Hide"}
+        </button>)}
+      </div>
+    </div>));
   }
 }
 

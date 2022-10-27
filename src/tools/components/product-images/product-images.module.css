@@ -1,6 +1,9 @@
 .imagesSection {
   display: flex;
 }
+.imagesList {
+  list-style: none;
+}
 
 .imagesListItem {
   width: 79px;
@@ -24,9 +27,9 @@
 }
 
 .selectedImage {
-  width: 610px;
-  height: 511px;
-  object-fit: contain;
-  margin-left: 40px;
-  margin-right: 100px;
+  width: 800px;
+  height: 800px;
+  object-fit: fill;
+  margin-left: 10px;
+  margin-right: 50px;
 }
