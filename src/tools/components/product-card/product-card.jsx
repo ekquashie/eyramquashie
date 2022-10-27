@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import s from "./product-cards.module.css";
 import {changeCurrency} from "../../../redux/product/actions/currency-action";
 import {addProduct} from "../../../redux/product/actions/product-action";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import CardButton from "../card-button/card-button";
-import { v4 as uuidv4 } from "uuid";
+import {v4 as uuidv4} from "uuid";
 
 class ProductCard extends Component {
   onButtonRedirect = (item) => {
@@ -23,7 +23,7 @@ class ProductCard extends Component {
   };
 
   render() {
-    const { item, currencies, location } = this.props;
+    const {item, currencies, location} = this.props;
 
     return (
       <li className={s.item}>
@@ -31,10 +31,10 @@ class ProductCard extends Component {
           className={s.link}
           to={{
             pathname: `/products/${item.id}`,
-            state: { from: location },
+            state: {from: location},
           }}
         >
-          <img className={s.image} src={item?.gallery[0]} alt="name" />
+          <img className={s.image} src={item?.gallery[0]} alt="name"/>
           {!item?.inStock && <p className={s.imageBlur}>OUT OF STOCK</p>}
 
           <p className={s.itemName}>{item.name}</p>
@@ -48,8 +48,8 @@ class ProductCard extends Component {
         {item.inStock && (
           <CardButton
             item={item}
-            onBtnClick={
-              item.attributes.length === 0
+            onButtonClick={
+              item.attributes.length !== 0
                 ? this.onCartButtonClick
                 : () => this.onButtonRedirect(item)
             }

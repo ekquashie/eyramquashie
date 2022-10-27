@@ -1,2 +1,2 @@
 import { createAction } from "@reduxjs/toolkit";
-export const changeCurrency = createAction("currency/changeCurrncy");
+export const changeCurrency = createAction("currency/changeCurrency");
