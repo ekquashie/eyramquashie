@@ -4,7 +4,7 @@ import s from "./modal-buttons.module.css";
 
 class ModalButtons extends Component {
   render() {
-    const { onCloseModal, location, navigate, params } = this.props;
+    const { onCloseModal, location} = this.props;
     return (
       <div className={s.buttons}>
         <Link

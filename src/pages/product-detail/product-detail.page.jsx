@@ -36,24 +36,30 @@ class ProductPage extends Component {
 
   setActiveAttribute = (attrs) => {
     const filtered = attrs.filter((attr) => attr !== "");
-
     this.setState({selectedAttribute: [...filtered]});
-    console.log(filtered)
   };
 
   onSubmitProduct = (e) => {
     e.preventDefault();
     const {selectedAttribute, productId} = this.state;
     const {onSubmit} = this.props;
-    if (selectedAttribute.length < 1) {
-      alert("Please select an attribute");
-    }
-    if (selectedAttribute.length > 0) {
+    if(this.state.product.attributes.length > 0) {
+      if (selectedAttribute.length < 1) {
+        alert("No attributes have been selected");
+      }
+      if (selectedAttribute.length > 0) {
+        onSubmit({
+          id: uuidv4(), name: productId, attributes: [...selectedAttribute], value: 1,
+        });
+        this.setState({selectedAttribute: []});
+      }
+    } else {
       onSubmit({
         id: uuidv4(), name: productId, attributes: [...selectedAttribute], value: 1,
       });
       this.setState({selectedAttribute: []});
     }
+
   };
 
   render() {
@@ -72,7 +78,7 @@ class ProductPage extends Component {
         <h3 className={s.title}>{product.name}</h3>
         <ProductAttributes
           product={product}
-          onAttributesClick={() => this.setActiveAttribute}
+          onAttributesClick={this.setActiveAttribute}
         />
 
         <p className={s.attributesTitle}>PRICE:</p>
@@ -95,7 +101,7 @@ class ProductPage extends Component {
         {product.description?.length > 300 && (<button
           className={s.showMoreBtn}
           type="button"
-          onClick={this.onShowMore}
+          onClick={() => this.onShowMore()}
         >
           {!isShowMore ? "Show more" : "Hide"}
         </button>)}

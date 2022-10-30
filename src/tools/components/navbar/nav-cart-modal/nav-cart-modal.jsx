@@ -13,7 +13,6 @@ class NavCartModal extends Component {
   state = {
     total: 0,
   };
-  s
 
   componentDidMount() {
     window.addEventListener("keydown", this.handleCloseModal);
@@ -29,11 +28,9 @@ class NavCartModal extends Component {
     }
   };
 
-  getProductsAttributes = (item) => {
-    return productAttributesRequest(item).then((response) => {
-      return response.data.product;
-    });
-  }
+  getProductsAttributes = async (item) => await productAttributesRequest(item).then((response) => {
+    return response.data.product;
+  })
 
   render() {
     const {products, currencies, onCloseModal} = this.props;
@@ -46,17 +43,19 @@ class NavCartModal extends Component {
         <p className={s.title}>
           My Bag,{" "}
           <span
-            className={s.totalItems}>{(products.length && products.length > 1) ? `${products.length} items` : `${products.length} item`}</span>
+            className={s.totalItems}>{(products.length > 1 || products.length === 0) ? `${products.length} items` : `${products.length} item`}</span>
         </p>
         {products?.map((item, index) => {
           const product = this.getProductsAttributes(item.name);
-          return product.name && <NavCartItem
+
+          return <NavCartItem
             key={index}
             product={product}
             currencies={currencies}
             item={item}
           />
         })}
+
         <div className={s.modalOptions}>
           <TotalCounter/>
           <ModalButtons onCloseModal={onCloseModal}/>

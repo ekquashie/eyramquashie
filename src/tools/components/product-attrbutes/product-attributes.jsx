@@ -4,17 +4,16 @@ import s from "./product-attributes.module.css";
 
 class ProductAttributes extends Component {
   state = {
-    color: "", size: "", capacity: "", withPorts: "", withTouch: "", attrs: [],
+    color: "", size: "", capacity: "", withPorts: "", withTouch: "", attrs: [], loading: false
   };
 
-  componentDidUpdate() {
-    const {color, size, capacity, withPorts, withTouch} = this.state;
+  // componentDidUpdate() {
+  //
+  // }
 
-    const onAttributesClick = this.props.onAttributesClick;
-    onAttributesClick([color, size, capacity, withPorts, withTouch]);
-  }
-
+  loading = false;
   attrs = (e) => {
+    this.setState({loading: true})
     const {name, value} = e.target;
 
     if (name === "Size") {
@@ -32,6 +31,15 @@ class ProductAttributes extends Component {
     if (name === "Touch ID in keyboard") {
       this.setState({withTouch: value});
     }
+
+    setTimeout(() => {
+      const {color, size, capacity, withPorts, withTouch} = this.state;
+
+      const onAttributesClick = this.props.onAttributesClick;
+      onAttributesClick([color, size, capacity, withPorts, withTouch]);
+      this.setState({loading: this.loading})
+    }, 100)
+
   };
 
   render() {
@@ -48,9 +56,9 @@ class ProductAttributes extends Component {
                 className={s.attrButton}
                 id={key}
                 type="radio"
-                name="attributes"
+                name={attr.name}
                 value={item.value}
-                disabled={!inStock}
+                disabled={!inStock || this.state.loading}
               />
               <label
                 className={attr.name === "Color" ? s.coloredLabel : s.attrLabel}
