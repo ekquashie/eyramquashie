@@ -26,7 +26,7 @@ class Counter extends Component {
       <div className={s.counter}>
         <button
           id={this.props.id}
-          className={!this.props.pageSize ? s.btn : s.bigBtn}
+          className={s.btn}
           onClick={this.increment}
         >
           +
@@ -35,7 +35,7 @@ class Counter extends Component {
           {this.props.value}
         </span>
         <button
-          className={!this.props.pageSize ? s.btn : s.bigBtn}
+          className={s.btn}
           onClick={this.decrement}
         >
           -

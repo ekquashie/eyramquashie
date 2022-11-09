@@ -16,9 +16,10 @@
   box-sizing: border-box;
   background: none;
   border: 1px solid #1d1f22;
+  cursor: pointer;
 }
 
-.btn:active {
+.bigBtn:active {
   transform: scale(0.95);
 }
 
@@ -28,10 +29,11 @@
   box-sizing: border-box;
   background: none;
   border: 1px solid #1d1f22;
+  cursor: pointer;
 }
 
 .bigValue {
-  font-family: Raleway;
+  font-family: Raleway, serif;
   font-weight: 500;
   font-size: 24px;
   line-height: 160%;

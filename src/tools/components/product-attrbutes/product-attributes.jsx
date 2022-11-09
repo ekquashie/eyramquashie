@@ -7,10 +7,6 @@ class ProductAttributes extends Component {
     color: "", size: "", capacity: "", withPorts: "", withTouch: "", attrs: [], loading: false
   };
 
-  // componentDidUpdate() {
-  //
-  // }
-
   loading = false;
   attrs = (e) => {
     this.setState({loading: true})

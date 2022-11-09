@@ -13,6 +13,7 @@ export default class Category extends Component {
   render() {
     const path = window.location.href.split('/', 4)[3]
 
+
     return (
       <section className={s.wrapper}>
         <ProductCards pageCategory={path} />

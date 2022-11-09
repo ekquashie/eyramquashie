@@ -12,6 +12,10 @@ class App extends Component {
       <Routes>
         <Route path={URLS.home.route} element={<PageWrap />}>
           <Route
+            path="/"
+            element={<Category />}
+          />
+          <Route
             path="/:category"
             element={<Category />}
           />

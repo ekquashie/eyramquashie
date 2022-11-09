@@ -1,5 +1,4 @@
 import {Component} from "react";
-
 import s from "./cart-item.module.css";
 import { Carousel } from "react-responsive-carousel";
 import Counter from "../counter/counter";
@@ -55,34 +54,34 @@ export default class CartItem extends Component {
 
             <div className={s.rightSide}>
               <Counter pageSize id={item.id} value={item.value}/>
-              <Carousel
-                className={s.carousel}
-                showThumbs={false}
-                showIndicators={false}
-                width={"141px"}
-                centerMode={true}
-                centerSlidePercentage={100}
-                emulateTouch={true}
-                swipeable={true}
-                infiniteLoop={true}
-                showStatus={false}
-                useKeyboardArrows={true}
-              >
-                {product?.gallery?.map((image) => {
-                  return (
-                    <img
-                      key={image}
-                      className={s.itemImage}
-                      src={image}
-                      alt={product?.name}
-                    />
-                  );
-                })}
-              </Carousel>
+              {/*<Carousel*/}
+              {/*  className={s.carousel}*/}
+              {/*  showThumbs={false}*/}
+              {/*  showIndicators={false}*/}
+              {/*  width={"141px"}*/}
+              {/*  centerMode={true}*/}
+              {/*  centerSlidePercentage={100}*/}
+              {/*  emulateTouch={true}*/}
+              {/*  swipeable={true}*/}
+              {/*  infiniteLoop={true}*/}
+              {/*  showStatus={false}*/}
+              {/*  useKeyboardArrows={true}*/}
+              {/*>*/}
+              {/*  {product?.gallery?.map((image, index) => {*/}
+              {/*    return (*/}
+              {/*      <div key={index}>*/}
+                      <img
+                        className={s.itemImage}
+                        src={product?.gallery[0]}
+                        alt={product?.name}
+                      />
+                    {/*</div>*/}
+              {/*    );*/}
+              {/*  })}*/}
+              {/*</Carousel>*/}
             </div>
           </div>
         )}
-        );
       </li>
     );
   }

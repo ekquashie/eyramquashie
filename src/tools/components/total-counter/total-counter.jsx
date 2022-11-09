@@ -52,7 +52,7 @@ class TotalCounter extends Component {
       <p className={s.total}>
         <span>Total</span>
         <span className={s.totalPrice}>
-          {Math.round(this.totalCount(arr) * 100) / 100} {currency}
+          {Math.round(this.totalCount(arr) * 100) / 100 || 0} {currency}
         </span>
       </p>
     </>);

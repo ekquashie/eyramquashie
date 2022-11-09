@@ -24,7 +24,7 @@ class ProductCards extends Component {
   }
 
   fetchData = () => {
-    this.state.pageCategory === "all" ? allProductsRequest().then((result) => {
+    this.state.pageCategory === "all" || this.state.pageCategory === "" ? allProductsRequest().then((result) => {
       this.setState({data: result.data})
     }).finally(() => {
       this.setState({loading: false})

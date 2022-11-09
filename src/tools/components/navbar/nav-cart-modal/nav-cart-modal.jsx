@@ -28,10 +28,6 @@ class NavCartModal extends Component {
     }
   };
 
-  getProductsAttributes = async (item) => await productAttributesRequest(item).then((response) => {
-    return response.data.product;
-  })
-
   render() {
     const {products, currencies, onCloseModal} = this.props;
 
@@ -46,11 +42,8 @@ class NavCartModal extends Component {
             className={s.totalItems}>{(products.length > 1 || products.length === 0) ? `${products.length} items` : `${products.length} item`}</span>
         </p>
         {products?.map((item, index) => {
-          const product = this.getProductsAttributes(item.name);
-
           return <NavCartItem
             key={index}
-            product={product}
             currencies={currencies}
             item={item}
           />

@@ -34,7 +34,7 @@ export class PageWrap extends Component {
     return (<div>
       <nav className="navbar">
         <div className="menu-container">
-          {this.state.categories.map((item, index) => {
+          {this.state.categories.map((item) => {
             return (<NavLink
               key={item.name}
               to={item.name}
