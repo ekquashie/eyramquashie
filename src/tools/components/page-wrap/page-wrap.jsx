@@ -36,6 +36,7 @@ export class PageWrap extends Component {
         <div className="menu-container">
           {this.state.categories.map((item) => {
             return (<NavLink
+              reloadDocument={true}
               key={item.name}
               to={item.name}
               className="menu-item"
