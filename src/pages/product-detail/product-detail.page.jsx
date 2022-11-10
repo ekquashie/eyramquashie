@@ -51,13 +51,11 @@ class ProductPage extends Component {
         onSubmit({
           id: uuidv4(), name: productId, attributes: [...selectedAttribute], value: 1,
         });
-        this.setState({selectedAttribute: []});
       }
     } else {
       onSubmit({
         id: uuidv4(), name: productId, attributes: [...selectedAttribute], value: 1,
       });
-      this.setState({selectedAttribute: []});
     }
 
   };

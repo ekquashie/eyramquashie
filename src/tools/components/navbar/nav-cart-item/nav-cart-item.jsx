@@ -2,17 +2,19 @@ import {Component} from "react";
 import Counter from "../../counter/counter";
 import s from "./nav-cart-item.module.css";
 import {productAttributesRequest} from "../../../services/gql-services";
+import Carousel from "../../carousel/carousel";
 
 export default class NavCartItem extends Component {
   state = {
     product: {},
+    productId: this.props.item.name,
   }
 
   async componentDidMount() {
-    const product = await productAttributesRequest(this.props.item.name).then((response) => {
+    const product = await productAttributesRequest(this.state.productId).then((response) => {
       return response.data.product
     })
-    this.setState({product: product})
+    this.setState({product: {id: this.state.productId, ...product}})
   }
 
   render() {
@@ -42,11 +44,11 @@ export default class NavCartItem extends Component {
 
       <div className={s.rightSide}>
         <Counter id={item.id} value={item.value}/>
-        <img
+        {product?.gallery?.length > 1 ? <Carousel product={product}/> : <img
           className={s.itemImage}
           src={product?.gallery[0]}
           alt={product.name}
-        />
+        />}
       </div>
     </div>);
   }

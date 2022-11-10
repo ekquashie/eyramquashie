@@ -5,7 +5,6 @@ import s from "./nav-cart-modal.module.css";
 import TotalCounter from "../../total-counter/total-counter";
 import NavCartItem from "../nav-cart-item/nav-cart-item";
 import ModalButtons from "../../modal-buttons/modal.buttons";
-import {productAttributesRequest} from "../../../services/gql-services";
 
 const modalRoot = document.querySelector("#modal-root");
 

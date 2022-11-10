@@ -54,3 +54,7 @@
   object-fit: contain;
   margin-left: 10px;
 }
+
+.itemImageHidden {
+  display: none;
+}

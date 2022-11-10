@@ -16,7 +16,7 @@ export const client = new ApolloClient({
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-    <Router forceRefresh>
+    <Router>
       <ApolloProvider client={client}>
         <Provider store={store}>
           <App />

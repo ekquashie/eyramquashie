@@ -12,6 +12,13 @@ const initialState = {
 
 const productReducer = createReducer(initialState.products.items, (builder) => {
   builder.addCase(addProduct, (state, {payload}) => {
+    const productIndex = state.findIndex((item) => { return item.name === payload.name});
+    if(productIndex > -1) {
+      const newValue = state[productIndex].value + payload.value
+      const arr = [...state]
+      arr.splice(productIndex, 1)
+      return [...arr, {...payload, value: newValue }]
+    }
     return [...state, payload]
   });
   builder.addCase(removeProduct, (state, {payload}) => {
