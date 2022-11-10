@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import s from "../navbar/nav-cart-item/nav-cart-item.module.css";
+import s from "../cart-item/cart-item.module.css";
+import {SlArrowLeft, SlArrowRight} from "react-icons/sl";
 
 class Carousel extends Component {
   state = {
@@ -18,7 +19,7 @@ class Carousel extends Component {
     const {slideIndex} = this.state;
     const {product} = this.props;
     return (
-      <div>
+      <div className={s.carouselContainer}>
         {product?.gallery?.map((image, index) => {
           return <img
             key={image}
@@ -27,9 +28,9 @@ class Carousel extends Component {
             alt={product.name}
           />
         })}
-        <div className={s.nextPrevContainer}>
-          <button onClick={this.decrementIndex}>Prev</button>
-          <button className={""} onClick={this.incrementIndex}>Next</button>
+        <div className={s.carouselButtonContainer}>
+          <button className={s.carouselButton} onClick={this.decrementIndex}><SlArrowLeft /></button>
+          <button className={s.carouselButton} onClick={this.incrementIndex}><SlArrowRight /></button>
         </div>
       </div>
     );

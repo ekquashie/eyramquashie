@@ -1,8 +1,8 @@
 import {Component} from "react";
 import s from "./cart-item.module.css";
-import { Carousel } from "react-responsive-carousel";
 import Counter from "../counter/counter";
 import {productAttributesRequest} from "../../services/gql-services";
+import Carousel from "../carousel/carousel";
 
 export default class CartItem extends Component {
   state = {
@@ -54,31 +54,11 @@ export default class CartItem extends Component {
 
             <div className={s.rightSide}>
               <Counter pageSize id={item.id} value={item.value}/>
-              {/*<Carousel*/}
-              {/*  className={s.carousel}*/}
-              {/*  showThumbs={false}*/}
-              {/*  showIndicators={false}*/}
-              {/*  width={"141px"}*/}
-              {/*  centerMode={true}*/}
-              {/*  centerSlidePercentage={100}*/}
-              {/*  emulateTouch={true}*/}
-              {/*  swipeable={true}*/}
-              {/*  infiniteLoop={true}*/}
-              {/*  showStatus={false}*/}
-              {/*  useKeyboardArrows={true}*/}
-              {/*>*/}
-              {/*  {product?.gallery?.map((image, index) => {*/}
-              {/*    return (*/}
-              {/*      <div key={index}>*/}
-                      <img
-                        className={s.itemImage}
-                        src={product?.gallery[0]}
-                        alt={product?.name}
-                      />
-                    {/*</div>*/}
-              {/*    );*/}
-              {/*  })}*/}
-              {/*</Carousel>*/}
+              {product?.gallery?.length > 1 ? <Carousel product={product}/> : <img
+                className={s.itemImage}
+                src={product?.gallery[0]}
+                alt={product?.name}
+              />}
             </div>
           </div>
         )}

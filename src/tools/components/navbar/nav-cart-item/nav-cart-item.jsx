@@ -44,11 +44,11 @@ export default class NavCartItem extends Component {
 
       <div className={s.rightSide}>
         <Counter id={item.id} value={item.value}/>
-        {product?.gallery?.length > 1 ? <Carousel product={product}/> : <img
+        <img
           className={s.itemImage}
           src={product?.gallery[0]}
           alt={product.name}
-        />}
+        />
       </div>
     </div>);
   }
