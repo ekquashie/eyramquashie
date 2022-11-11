@@ -1,24 +1,30 @@
 import {Component} from "react";
 import s from "./cart-item.module.css";
 import Counter from "../counter/counter";
-import {productAttributesRequest} from "../../services/gql-services";
+import {productAttributesRequest, productRequest} from "../../services/gql-services";
 import Carousel from "../carousel/carousel";
+import CartProductAttributes from "../cart-product-attributes/cart-product-attributes";
 
 export default class CartItem extends Component {
   state = {
     product: {},
+    productWithAttributes: {},
   }
 
   async componentDidMount() {
     const product = await productAttributesRequest(this.props.item.name).then((result) => {
       return result.data.product
     })
-    this.setState({product: product})
+    const productWithAttributes = await productRequest(this.props.item.name).then((result) => {
+      return result.data.product
+    })
+    this.setState({product, productWithAttributes})
   }
 
   render() {
     const {item, currencies} = this.props;
-    const {product} = this.state;
+    const {product, productWithAttributes} = this.state;
+    console.log(product)
 
     return (
       <li id={item.id} className={s.item}>
@@ -26,6 +32,7 @@ export default class CartItem extends Component {
           <div className={s.miniCard}>
             <div className={s.leftSide}>
               <p className={s.itemName}>{product.name}</p>
+              <p className={s.itemBrand}>{productWithAttributes.brand}</p>
               <p className={s.itemPrice}>
                 {product?.prices.map(
                   (price) =>
@@ -35,23 +42,26 @@ export default class CartItem extends Component {
                     } `
                 )}
               </p>
-              <div className={s.attributes}>
-                {item.attributes.map((attr) => {
-                  return (
-                    <p
-                      key={attr}
-                      style={{backgroundColor: attr}}
-                      className={
-                        attr.includes("#") ? s.coloredLabel : s.itemAttrs
-                      }
-                    >
-                      {attr}
-                    </p>
-                  );
-                })}
+              <div>
+                {/*{item.attributes.map((attr) => {*/}
+                {/*  return (*/}
+                {/*    <p*/}
+                {/*      key={attr}*/}
+                {/*      style={{backgroundColor: attr}}*/}
+                {/*      className={*/}
+                {/*        attr.includes("#") ? s.coloredLabel : s.itemAttrs*/}
+                {/*      }*/}
+                {/*    >*/}
+                {/*      {attr}*/}
+                {/*    </p>*/}
+                {/*  );*/}
+                {/*})}*/}
+                <CartProductAttributes
+                  product={{...productWithAttributes, selectedAttribute: item.attributes}}
+                  onAttributesClick={() => console.log('Hi')}
+                />
               </div>
             </div>
-
             <div className={s.rightSide}>
               <Counter pageSize id={item.id} value={item.value}/>
               {product?.gallery?.length > 1 ? <Carousel product={product}/> : <img

@@ -26,7 +26,7 @@ class Counter extends Component {
       <div className={s.counter}>
         <button
           id={this.props.id}
-          className={s.btn}
+          className={s.bigBtn}
           onClick={this.increment}
         >
           +
@@ -35,7 +35,7 @@ class Counter extends Component {
           {this.props.value}
         </span>
         <button
-          className={s.btn}
+          className={s.bigBtn}
           onClick={this.decrement}
         >
           -

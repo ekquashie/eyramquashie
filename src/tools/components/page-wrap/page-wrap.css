@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 50px;
+  padding: 0 100px;
 }
 .navbar .menu-container {
   display: flex;
@@ -77,5 +77,5 @@
 
 .main-container {
   width: 100%;
-  padding: 80px 50px;
+  padding: 80px 100px;
 }

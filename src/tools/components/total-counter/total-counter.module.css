@@ -1,14 +1,17 @@
 .total {
   display: flex;
   justify-content: space-between;
-  font-family: Roboto, serif;
+  align-items: center;
+  font-family: Raleway, serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 24px;
   line-height: 18px;
+  padding-top: 32px;
 }
 .totalPrice {
   font-weight: 700;
-  font-size: 16px;
+  font-size: 24px;
   line-height: 160%;
+  margin-left: 24px;
 }

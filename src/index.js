@@ -3,10 +3,11 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./redux/store";
-import { ApolloProvider, ApolloClient, InMemoryCache} from "@apollo/client";
+import {BrowserRouter as Router} from "react-router-dom";
+import {Provider} from "react-redux";
+import store, {persistor} from "./redux/store";
+import {ApolloProvider, ApolloClient, InMemoryCache} from "@apollo/client";
+import {PersistGate} from "redux-persist/integration/react";
 
 export const client = new ApolloClient({
   uri: "http://localhost:4000",
@@ -16,14 +17,16 @@ export const client = new ApolloClient({
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-    <Router>
-      <ApolloProvider client={client}>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </ApolloProvider>
-    </Router>
-   // </React.StrictMode>
+  <Router>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <App/>
+        </PersistGate>
+      </Provider>
+    </ApolloProvider>
+  </Router>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

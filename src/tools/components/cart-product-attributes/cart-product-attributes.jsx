@@ -1,8 +1,8 @@
 import {Component} from "react";
 import {v4 as uuidv4} from "uuid";
-import s from "./product-attributes.module.css";
+import s from "../product-attrbutes/product-attributes.module.css";
 
-class ProductAttributes extends Component {
+class CartProductAttributes extends Component {
   state = {
     color: "", size: "", capacity: "", withPorts: "", withTouch: "", attrs: [], loading: false
   };
@@ -39,9 +39,9 @@ class ProductAttributes extends Component {
   };
 
   render() {
-    const {inStock, attributes} = this.props.product;
+    const {inStock, attributes, selectedAttribute} = this.props.product;
 
-    return attributes?.map((attr) => {
+    return (<div>{attributes?.map((attr) => {
       return (<div key={attr.name} className={s.attributes}>
         <h2 className={s.attributesTitle}>{attr.name.toUpperCase()}:</h2>
         <div className={s.attributesList}>
@@ -52,6 +52,7 @@ class ProductAttributes extends Component {
                 onChange={this.attrs}
                 className={s.attrButton}
                 id={key}
+                checked={selectedAttribute.includes(item.value)}
                 type="radio"
                 name={attr.name}
                 value={item.value}
@@ -61,7 +62,7 @@ class ProductAttributes extends Component {
                 className={attr.name === "Color" ? s.coloredLabel : s.attrLabel}
                 htmlFor={key}
                 style={{
-                  backgroundColor: attr.name === "Color" && `${item.displayValue}`,
+                  backgroundColor: attr.name === "Color" && `${item.value}`,
                 }}
               >
                 {item.value}
@@ -70,8 +71,8 @@ class ProductAttributes extends Component {
           })}
         </div>
       </div>);
-    });
+    })}</div>);
   }
 }
 
-export default ProductAttributes;
+export default CartProductAttributes;

@@ -2,7 +2,6 @@ import {Component} from "react";
 import Counter from "../../counter/counter";
 import s from "./nav-cart-item.module.css";
 import {productAttributesRequest} from "../../../services/gql-services";
-import Carousel from "../../carousel/carousel";
 
 export default class NavCartItem extends Component {
   state = {

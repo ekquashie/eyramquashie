@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import s from "./total-counter.module.css";
+import s from "./cart-total-counter.module.css";
 import {Component} from "react";
 import {pricesRequest} from "../../services/gql-services";
 
@@ -14,7 +14,7 @@ class TotalCounter extends Component {
     })
   }
 
-  totalCount = (items) => {
+  cartTotalCount = (items) => {
     const {products, currency} = this.props;
     if(!products)
       return <div>Loading...</div>
@@ -25,8 +25,8 @@ class TotalCounter extends Component {
         const allPrices = prices?.filter((price) => {
           return price.currency.symbol === currency && price;
         });
-        return allPrices?.reduce((accumulator, price) => {
-          return accumulator + price.amount;
+        return allPrices?.reduce((acc, price) => {
+          return acc + price.amount;
         }, 0);
       });
       return prices?.reduce((acc, item, i) => {
@@ -50,10 +50,25 @@ class TotalCounter extends Component {
           arr.push(items[0])
         }
       })}
-      <p className={s.total}>
+      <p style={{marginTop: "40px", borderTop: "1px solid #e5e5e5"}} className={s.cartTotalQuantity}>
+        <span>Tax 21%:</span>
+        <span className={s.cartTotalPrice}>
+          {currency}{((Math.round(this.cartTotalCount(arr) * 100) / 100 || 0) * 0.21).toFixed(2)}
+        </span>
+      </p>
+      <p className={s.cartTotalQuantity}>
+        <span>Quantity:</span>
+        <span className={s.cartTotalPrice}>
+          {products?.reduce((acc, item) => {
+            console.log(item)
+            return acc + item.value;
+          }, 0)}
+        </span>
+      </p>
+      <p className={s.cartTotal}>
         <span>Total:</span>
-        <span className={s.totalPrice}>
-          {currency}{Math.round(this.totalCount(arr) * 100) / 100 || 0}
+        <span className={s.cartTotalPrice}>
+          {currency}{Math.round(this.cartTotalCount(arr) * 100) / 100 || 0}
         </span>
       </p>
     </>);

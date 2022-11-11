@@ -51,11 +51,13 @@ class ProductPage extends Component {
         onSubmit({
           id: uuidv4(), name: productId, attributes: [...selectedAttribute], value: 1,
         });
+        alert("Product added to cart")
       }
     } else {
       onSubmit({
         id: uuidv4(), name: productId, attributes: [...selectedAttribute], value: 1,
       });
+      alert("Product added to cart")
     }
 
   };

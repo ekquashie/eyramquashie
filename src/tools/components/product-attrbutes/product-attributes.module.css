@@ -1,7 +1,6 @@
 .attributes {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
 }
 
 .attributesTitle {
@@ -10,6 +9,7 @@
     font-size: 18px;
     line-height: 18px;
     margin-bottom: 8px;
+    margin-top: 20px;
 }
 
 .attributesList {
@@ -66,12 +66,12 @@
     text-align: center;
     box-sizing: border-box;
     font-size: 0;
-    width: 63px;
-    height: 45px;
+    width: 32px;
+    height: 32px;
     border: 1px solid #a6a6a6;
     cursor: pointer;
 }
 
 .attrButton:checked + .coloredLabel {
-    border: 5px solid #1d1f22;
+    border: 2px solid #5ECE7B;
 }

@@ -1,0 +1,24 @@
+.cartTotalQuantity {
+    font-family: Raleway, serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.cartTotal {
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
+    font-family: Raleway, serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 18px;
+    margin-bottom: 20px;
+}
+.cartTotalPrice {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 160%;
+    margin-left: 24px;
+}

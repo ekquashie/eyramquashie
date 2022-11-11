@@ -1,14 +1,12 @@
 .item {
-    height: 186px;
-    padding-top: 20px;
+    padding: 20px 0;
     border-top: 1px solid #e5e5e5;
-    margin-bottom: 20px;
+    font-family: Raleway, serif;
 }
 
 .miniCard {
     display: flex;
     justify-content: space-between;
-    height: 185px;
     color: #1d1f22;
 }
 
@@ -19,10 +17,18 @@
 }
 
 .itemName {
-    font-family: Raleway;
+    font-family: Raleway, serif;
     font-weight: 600;
     font-size: 30px;
     line-height: 27px;
+}
+
+.itemBrand {
+    font-family: Raleway, serif;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 27px;
+    margin-top: 20px;
 }
 
 .itemPrice {
@@ -30,6 +36,7 @@
     font-weight: 700;
     font-size: 24px;
     line-height: 18px;
+    margin-top: 20px;
 }
 
 .attributes {
@@ -64,6 +71,10 @@
     border: 1px solid #1d1f22;
 }
 
+.selectedAttribute {
+    background-color: black;
+}
+
 .rightSide {
     display: flex;
 }
@@ -75,8 +86,8 @@
 
 .itemImage {
     display: block;
-    width: 141px;
-    height: 185px;
+    width: 200px;
+    height: 288px;
     object-fit: contain;
 }
 
