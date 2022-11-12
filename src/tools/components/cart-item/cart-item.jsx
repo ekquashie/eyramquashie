@@ -24,7 +24,6 @@ export default class CartItem extends Component {
   render() {
     const {item, currencies} = this.props;
     const {product, productWithAttributes} = this.state;
-    console.log(product)
 
     return (
       <li id={item.id} className={s.item}>

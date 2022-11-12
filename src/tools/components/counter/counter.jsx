@@ -22,11 +22,12 @@ class Counter extends Component {
   };
 
   render() {
+    const {customClass} = this.props;
     return (
       <div className={s.counter}>
         <button
           id={this.props.id}
-          className={s.bigBtn}
+          className={customClass ? s[customClass] : s.bigBtn}
           onClick={this.increment}
         >
           +
@@ -35,7 +36,7 @@ class Counter extends Component {
           {this.props.value}
         </span>
         <button
-          className={s.bigBtn}
+          className={customClass ? s[customClass] : s.bigBtn}
           onClick={this.decrement}
         >
           -

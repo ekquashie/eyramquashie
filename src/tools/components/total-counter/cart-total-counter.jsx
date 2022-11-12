@@ -60,7 +60,6 @@ class TotalCounter extends Component {
         <span>Quantity:</span>
         <span className={s.cartTotalPrice}>
           {products?.reduce((acc, item) => {
-            console.log(item)
             return acc + item.value;
           }, 0)}
         </span>

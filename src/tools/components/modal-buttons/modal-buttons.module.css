@@ -2,10 +2,11 @@
   display: flex;
   justify-content: space-between;
   padding-bottom: 20px;
+  margin-top: 32px;
 }
 
 .buttonLink {
-  font-family: Raleway;
+  font-family: Raleway, serif;
   font-weight: 600;
   font-size: 14px;
   line-height: 120%;

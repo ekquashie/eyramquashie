@@ -16,7 +16,14 @@
   font-family: Raleway, serif;
   font-weight: 300;
   font-size: 16px;
-  line-height: 160%;
+}
+
+.itemBrand {
+  font-family: Raleway, serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27px;
+  margin-top: 20px;
 }
 
 .itemPrice {

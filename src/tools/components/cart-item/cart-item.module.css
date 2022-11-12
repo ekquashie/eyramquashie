@@ -87,7 +87,7 @@
 .itemImage {
     display: block;
     width: 200px;
-    height: 288px;
+    height: 100%;
     object-fit: contain;
 }
 
