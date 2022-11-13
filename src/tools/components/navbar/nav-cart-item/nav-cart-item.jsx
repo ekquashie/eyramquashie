@@ -44,8 +44,8 @@ export default class NavCartItem extends Component {
           <ModalProductAttributes
             product={productWithAttributes}
             selectedAttributes={item.attributes}
-            onAttributesClick={() => console.log('Hi')}
             index={index}
+            id={item.id}
           />
         </div>
       </div>

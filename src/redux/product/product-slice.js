@@ -32,7 +32,15 @@ const productReducer = createReducer(initialState.products.items, (builder) => {
     // return [...state, payload]
   });
   builder.addCase(editAttribute, (state, {payload}) => {
-    return state.filter((product) => product.id !== payload);
+    const currentState = [...state];
+    const productIndex = state.findIndex((item) => {
+      return item.id === payload.id;
+    })
+    if (productIndex > -1) {
+      const newItem = {...currentState[productIndex], attributes: payload.attributes}
+      currentState.splice(productIndex, 1, newItem);
+      return currentState
+    }
   });
   builder.addCase(removeProduct, (state, {payload}) => {
     return state.filter((product) => product.id !== payload);

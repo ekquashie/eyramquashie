@@ -1,19 +1,33 @@
 import {Component} from "react";
 import {v4 as uuidv4} from "uuid";
 import s from "../product-attrbutes/product-attributes.module.css";
+import {editAttribute} from "../../../redux/product/actions/product-action";
+import {connect} from "react-redux";
 
 class CartProductAttributes extends Component {
   state = {
-    color: "", size: "", capacity: "", withPorts: "", withTouch: "", attrs: [], loading: false, selectedAttributes: this.props.selectedAttributes
+    color: "",
+    size: "",
+    capacity: "",
+    withPorts: "",
+    withTouch: "",
+    attrs: [],
+    loading: false,
+    selectedAttributes: this.props.selectedAttributes
   };
 
   loading = false;
   attrs = (e) => {
-    const {value} = e.target;
-    const inputIndex = e.target.dataset.index
+    const {value, dataset} = e.target;
+    const {onSubmit} = this.props;
+    const inputIndex = dataset.index
     let newAttributes = [...this.state.selectedAttributes]
     newAttributes[inputIndex] = value;
     this.setState({selectedAttributes: newAttributes})
+    console.log(this.props.id)
+    onSubmit({
+      id: this.props.id, attributes: [...newAttributes]
+    });
   };
 
   render() {
@@ -55,4 +69,8 @@ class CartProductAttributes extends Component {
   }
 }
 
-export default CartProductAttributes;
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit: (product) => dispatch(editAttribute(product)),
+});
+
+export default connect(null, mapDispatchToProps)(CartProductAttributes);

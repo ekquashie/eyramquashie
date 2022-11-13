@@ -21,12 +21,6 @@ export default class CartItem extends Component {
     this.setState({product, productWithAttributes})
   }
 
-  setActiveAttribute = (attrs) => {
-    console.log(attrs)
-    // const filtered = attrs.filter((attr) => attr !== "");
-    // this.setState({selectedAttribute: [...filtered]});
-  };
-
   render() {
     const {item, currencies, index} = this.props;
     const {product, productWithAttributes} = this.state;
@@ -50,9 +44,9 @@ export default class CartItem extends Component {
               <div>
                 <CartProductAttributes
                   product={productWithAttributes}
-                  onAttributesClick={this.setActiveAttribute}
                   selectedAttributes={item.attributes}
                   index={index}
+                  id={item.id}
                 />
               </div>
             </div>

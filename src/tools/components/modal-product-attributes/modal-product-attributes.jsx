@@ -1,6 +1,8 @@
 import {Component} from "react";
 import {v4 as uuidv4} from "uuid";
 import s from "./modal-product-attributes.module.css";
+import {connect} from "react-redux";
+import {editAttribute} from "../../../redux/product/actions/product-action";
 
 class ModalProductAttributes extends Component {
   state = {
@@ -10,36 +12,14 @@ class ModalProductAttributes extends Component {
   loading = false;
   attrs = (e) => {
     const {value} = e.target;
+    const {onSubmit} = this.props;
     const inputIndex = e.target.dataset.index
     let newAttributes = [...this.state.selectedAttributes]
     newAttributes[inputIndex] = value;
     this.setState({selectedAttributes: newAttributes})
-    // this.setState({loading: true})
-    // const {name, value} = e.target;
-    //
-    // if (name === "Size") {
-    //   this.setState({size: value});
-    // }
-    // if (name === "Color") {
-    //   this.setState({color: value});
-    // }
-    // if (name === "Capacity") {
-    //   this.setState({capacity: value});
-    // }
-    // if (name === "With USB 3 ports") {
-    //   this.setState({withPorts: value});
-    // }
-    // if (name === "Touch ID in keyboard") {
-    //   this.setState({withTouch: value});
-    // }
-    //
-    // setTimeout(() => {
-    //   const {color, size, capacity, withPorts, withTouch} = this.state;
-    //   const onAttributesClick = this.props.onAttributesClick;
-    //   onAttributesClick([color, size, capacity, withPorts, withTouch]);
-    //   this.setState({loading: this.loading})
-    // }, 100)
-
+    onSubmit({
+      id: this.props.id, attributes: [...newAttributes]
+    });
   };
 
   render() {
@@ -81,4 +61,8 @@ class ModalProductAttributes extends Component {
   }
 }
 
-export default ModalProductAttributes;
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit: (product) => dispatch(editAttribute(product)),
+});
+
+export default connect(null, mapDispatchToProps)(ModalProductAttributes);
