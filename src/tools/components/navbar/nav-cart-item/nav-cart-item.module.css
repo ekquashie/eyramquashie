@@ -1,7 +1,6 @@
 .miniCard {
   display: flex;
   justify-content: space-between;
-  height: 137px;
   color: #1d1f22;
   margin-bottom: 40px;
 }
