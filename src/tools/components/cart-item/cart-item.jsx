@@ -58,6 +58,7 @@ export default class CartItem extends Component {
                 <CartProductAttributes
                   product={{...productWithAttributes, selectedAttribute: item.attributes}}
                   onAttributesClick={() => console.log('Hi')}
+                  index={this.props.index}
                 />
               </div>
             </div>

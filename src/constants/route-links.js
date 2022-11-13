@@ -3,10 +3,6 @@ export const URLS = {
     route: "/",
     url: "/",
   },
-  category: {
-    route: "/:categoryName",
-    url: "/:categoryName",
-  },
   productDetail: {
     route: "/products",
     url: "/products",

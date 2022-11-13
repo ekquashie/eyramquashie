@@ -45,6 +45,7 @@ class NavCartModal extends Component {
             key={index}
             currencies={currencies}
             item={item}
+            index={index}
           />
         })}
 

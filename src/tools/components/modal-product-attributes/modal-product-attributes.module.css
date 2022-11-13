@@ -17,7 +17,7 @@
 }
 
 .attributesForm {
-    /*display: inline-block;*/
+    display: inline-block;
 }
 
 .attributesForm:not(:last-child) {

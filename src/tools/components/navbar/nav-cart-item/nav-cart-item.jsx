@@ -22,7 +22,7 @@ export default class NavCartItem extends Component {
   }
 
   render() {
-    const {currencies, item} = this.props;
+    const {currencies, item, index} = this.props;
     const {product, productWithAttributes} = this.state;
 
     if (!product?.name) return <div>Loading...</div>
@@ -32,12 +32,19 @@ export default class NavCartItem extends Component {
         <p className={s.itemName}>{product.name}</p>
         <p className={s.itemBrand}>{productWithAttributes.brand}</p>
         <p className={s.itemPrice}>
-          {product?.prices?.map((cur) => cur.currency === currencies && `${cur.currency} ${Math.round(cur.amount * item.value * 100) / 100}`)}
+          {product?.prices.map(
+            (price) =>
+              price.currency.symbol === currencies &&
+              `${price.currency.symbol} ${
+                Math.round(price.amount * item.value * 100) / 100
+              } `
+          )}
         </p>
         <div className={s.attributes}>
           <ModalProductAttributes
             product={{...productWithAttributes, selectedAttribute: item.attributes}}
             onAttributesClick={() => console.log('Hi')}
+            index={index}
           />
         </div>
       </div>

@@ -8,17 +8,18 @@ class Cart extends Component {
   render() {
     const {products, currencies} = this.props;
     return (
-      <div className={s.wrapper}>
+      <div>
         <h2 className={s.pageTitle}>CART</h2>
         {products.length ? (
           <>
             <ul className={s.list}>
-              {products.map((item) => {
+              {products.map((item, index) => {
                 return (
                   <CartItem
                     key={item.id}
                     item={item}
                     currencies={currencies}
+                    index={index}
                   />
                 );
               })}

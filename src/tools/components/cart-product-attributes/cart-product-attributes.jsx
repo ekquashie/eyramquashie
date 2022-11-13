@@ -39,14 +39,14 @@ class CartProductAttributes extends Component {
   };
 
   render() {
-    const {inStock, attributes, selectedAttribute} = this.props.product;
+    const {name, attributes, selectedAttribute} = this.props.product;
 
     return (<div>{attributes?.map((attr) => {
       return (<div key={attr.name} className={s.attributes}>
         <h2 className={s.attributesTitle}>{attr.name.toUpperCase()}:</h2>
         <div className={s.attributesList}>
           {attr.items.map((item) => {
-            const key = uuidv4();
+            const key = uuidv4()
             return (<div key={item.value} className={s.attributesForm}>
               <input
                 onChange={this.attrs}
@@ -54,9 +54,9 @@ class CartProductAttributes extends Component {
                 id={key}
                 checked={selectedAttribute.includes(item.value)}
                 type="radio"
-                name={attr.name}
+                name={attr.name + name + this.props.index}
                 value={item.value}
-                disabled={!inStock || this.state.loading}
+                disabled={this.state.loading}
               />
               <label
                 className={attr.name === "Color" ? s.coloredLabel : s.attrLabel}

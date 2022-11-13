@@ -30,7 +30,6 @@ class ModalProductAttributes extends Component {
 
     setTimeout(() => {
       const {color, size, capacity, withPorts, withTouch} = this.state;
-
       const onAttributesClick = this.props.onAttributesClick;
       onAttributesClick([color, size, capacity, withPorts, withTouch]);
       this.setState({loading: this.loading})
@@ -39,10 +38,11 @@ class ModalProductAttributes extends Component {
   };
 
   render() {
-    const {inStock, attributes, selectedAttribute} = this.props.product;
+    const {name, inStock, attributes, selectedAttribute} = this.props.product;
+    const index = this.props.index;
 
     return (<div>{attributes?.map((attr) => {
-      return (<div key={attr.name} className={s.attributes}>
+      return (<div key={attr.name + name + "modal" + index} className={s.attributes}>
         <h2 className={s.attributesTitle}>{attr.name.toUpperCase()}:</h2>
         <div className={s.attributesList}>
           {attr.items.map((item) => {
@@ -54,7 +54,7 @@ class ModalProductAttributes extends Component {
                 id={key}
                 checked={selectedAttribute.includes(item.value)}
                 type="radio"
-                name={attr.name}
+                name={attr.name + name + "modal" + index}
                 value={item.value}
                 disabled={!inStock || this.state.loading}
               />
