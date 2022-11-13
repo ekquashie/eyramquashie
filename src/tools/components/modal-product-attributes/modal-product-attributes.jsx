@@ -42,7 +42,6 @@ class ModalProductAttributes extends Component {
     const {inStock, attributes, selectedAttribute} = this.props.product;
 
     return (<div>{attributes?.map((attr) => {
-      console.log(attr.name)
       return (<div key={attr.name} className={s.attributes}>
         <h2 className={s.attributesTitle}>{attr.name.toUpperCase()}:</h2>
         <div className={s.attributesList}>

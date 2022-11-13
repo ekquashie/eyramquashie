@@ -24,7 +24,6 @@ export default class NavCartItem extends Component {
   render() {
     const {currencies, item} = this.props;
     const {product, productWithAttributes} = this.state;
-    console.log(product)
 
     if (!product?.name) return <div>Loading...</div>
 
