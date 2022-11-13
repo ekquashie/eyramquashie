@@ -32,7 +32,7 @@ class ProductAttributes extends Component {
       const {color, size, capacity, withPorts, withTouch} = this.state;
 
       const onAttributesClick = this.props.onAttributesClick;
-      onAttributesClick([color, size, capacity, withPorts, withTouch]);
+      onAttributesClick([capacity, color, size, withPorts, withTouch]);
       this.setState({loading: this.loading})
     }, 100)
 
