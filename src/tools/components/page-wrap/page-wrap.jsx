@@ -12,18 +12,6 @@ export class PageWrap extends Component {
     showModal: false, categories: [], category: {},
   };
 
-  // onCartClick = () => {
-  //   this.setState((prevState) => {
-  //     return {showModal: !prevState.showModal};
-  //   });
-  // };
-
-  // onModalClose = () => {
-  //   this.setState({
-  //     showModal: false,
-  //   });
-  // };
-
   componentDidMount() {
     categoriesNameRequest().then((result) => {
       this.setState({categories: result.data.categories, category: result.data.category})
