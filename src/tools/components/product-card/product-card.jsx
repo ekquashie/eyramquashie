@@ -6,7 +6,6 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import CardButton from "../card-button/card-button";
 import {v4 as uuidv4} from "uuid";
-import {withRouter} from "../../libraries/withRouter";
 
 class ProductCard extends Component {
   onButtonRedirect = (item) => {
@@ -21,13 +20,13 @@ class ProductCard extends Component {
   };
 
   render() {
-    const {item, currencies, location} = this.props;
+    const {item, currencies} = this.props;
 
     return (<li className={s.item}>
         <Link
           className={s.link}
           to={{
-            pathname: `/products/${item.id}`, state: {from: location},
+            pathname: `/products/${item.id}`,
           }}
         >
           <img className={s.image} src={item?.gallery[0]} alt="name"/>
@@ -56,4 +55,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 //withRouter not working in react-router v6
 //Had to create a custom withRouter components since hooks cannot be used in class based components
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductCard));
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);
