@@ -29,10 +29,12 @@ const productReducer = createReducer(initialState.products.items, (builder) => {
     } else {
       return [...state, payload]
     }
-    // return [...state, payload]
   });
   builder.addCase(editAttribute, (state, {payload}) => {
     const currentState = [...state];
+    console.log(current(state))
+    // let currentStateToCompare = current(state).attributes.join(", ");
+    // let payloadStateToCompare = payload.attributes.join(", ");
     const productIndex = state.findIndex((item) => {
       return item.id === payload.id;
     })
