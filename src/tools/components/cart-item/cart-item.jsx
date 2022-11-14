@@ -22,7 +22,7 @@ export default class CartItem extends Component {
   }
 
   render() {
-    const {item, currencies} = this.props;
+    const {item, currencies, index} = this.props;
     const {product, productWithAttributes} = this.state;
 
     return (
@@ -42,23 +42,11 @@ export default class CartItem extends Component {
                 )}
               </p>
               <div>
-                {/*{item.attributes.map((attr) => {*/}
-                {/*  return (*/}
-                {/*    <p*/}
-                {/*      key={attr}*/}
-                {/*      style={{backgroundColor: attr}}*/}
-                {/*      className={*/}
-                {/*        attr.includes("#") ? s.coloredLabel : s.itemAttrs*/}
-                {/*      }*/}
-                {/*    >*/}
-                {/*      {attr}*/}
-                {/*    </p>*/}
-                {/*  );*/}
-                {/*})}*/}
                 <CartProductAttributes
-                  product={{...productWithAttributes, selectedAttribute: item.attributes}}
-                  onAttributesClick={() => console.log('Hi')}
-                  index={this.props.index}
+                  product={productWithAttributes}
+                  selectedAttributes={item.attributes}
+                  index={index}
+                  id={item.id}
                 />
               </div>
             </div>

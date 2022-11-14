@@ -1,47 +1,40 @@
 import {Component} from "react";
 import {v4 as uuidv4} from "uuid";
 import s from "../product-attrbutes/product-attributes.module.css";
+import {editAttribute} from "../../../redux/product/actions/product-action";
+import {connect} from "react-redux";
 
 class CartProductAttributes extends Component {
   state = {
-    color: "", size: "", capacity: "", withPorts: "", withTouch: "", attrs: [], loading: false
+    color: "",
+    size: "",
+    capacity: "",
+    withPorts: "",
+    withTouch: "",
+    attrs: [],
+    loading: false,
+    selectedAttributes: this.props.selectedAttributes
   };
 
   loading = false;
   attrs = (e) => {
-    this.setState({loading: true})
-    const {name, value} = e.target;
-
-    if (name === "Size") {
-      this.setState({size: value});
-    }
-    if (name === "Color") {
-      this.setState({color: value});
-    }
-    if (name === "Capacity") {
-      this.setState({capacity: value});
-    }
-    if (name === "With USB 3 ports") {
-      this.setState({withPorts: value});
-    }
-    if (name === "Touch ID in keyboard") {
-      this.setState({withTouch: value});
-    }
-
-    setTimeout(() => {
-      const {color, size, capacity, withPorts, withTouch} = this.state;
-
-      const onAttributesClick = this.props.onAttributesClick;
-      onAttributesClick([color, size, capacity, withPorts, withTouch]);
-      this.setState({loading: this.loading})
-    }, 100)
-
+    const {value, dataset} = e.target;
+    const {onSubmit} = this.props;
+    const inputIndex = dataset.index
+    let newAttributes = [...this.state.selectedAttributes]
+    newAttributes[inputIndex] = value;
+    this.setState({selectedAttributes: newAttributes})
+    console.log(this.props.id)
+    onSubmit({
+      id: this.props.id, attributes: [...newAttributes]
+    });
   };
 
   render() {
-    const {name, attributes, selectedAttribute} = this.props.product;
+    const {name, attributes} = this.props.product;
+    const {selectedAttributes} = this.state;
 
-    return (<div>{attributes?.map((attr) => {
+    return (<div>{attributes?.map((attr, index) => {
       return (<div key={attr.name} className={s.attributes}>
         <h2 className={s.attributesTitle}>{attr.name.toUpperCase()}:</h2>
         <div className={s.attributesList}>
@@ -52,7 +45,8 @@ class CartProductAttributes extends Component {
                 onChange={this.attrs}
                 className={s.attrButton}
                 id={key}
-                checked={selectedAttribute.includes(item.value)}
+                data-index={index}
+                checked={selectedAttributes.includes(item.value)}
                 type="radio"
                 name={attr.name + name + this.props.index}
                 value={item.value}
@@ -75,4 +69,8 @@ class CartProductAttributes extends Component {
   }
 }
 
-export default CartProductAttributes;
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit: (product) => dispatch(editAttribute(product)),
+});
+
+export default connect(null, mapDispatchToProps)(CartProductAttributes);

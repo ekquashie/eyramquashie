@@ -42,9 +42,10 @@ export default class NavCartItem extends Component {
         </p>
         <div className={s.attributes}>
           <ModalProductAttributes
-            product={{...productWithAttributes, selectedAttribute: item.attributes}}
-            onAttributesClick={() => console.log('Hi')}
+            product={productWithAttributes}
+            selectedAttributes={item.attributes}
             index={index}
+            id={item.id}
           />
         </div>
       </div>
