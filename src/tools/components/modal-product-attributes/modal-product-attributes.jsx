@@ -25,7 +25,6 @@ class ModalProductAttributes extends Component {
   render() {
     const {name, inStock, attributes} = this.props.product;
     const {selectedAttributes} = this.state;
-    console.log(this.props.product);
 
     return (<div>{attributes?.map((attr, index) => {
       return (<div key={attr.name + name + "modal" + index} className={s.attributes}>

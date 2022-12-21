@@ -5,6 +5,8 @@ import {changeCurrency} from "../../../../redux/product/actions/currency-action"
 import {currenciesRequest} from "../../../services/gql-services";
 import {MdKeyboardArrowDown, MdKeyboardArrowUp} from "react-icons/md";
 
+const currencyRoot = document.querySelector("#modal-root");
+
 class NavCurrencyButton extends Component {
   state = {
     showModal: false, currencies: [],
@@ -32,7 +34,7 @@ class NavCurrencyButton extends Component {
   render() {
     const {showModal, currencies} = this.state;
     return (<div>
-      <button className={s.select} type="button" onClick={this.onButtonClick}>
+      <button id="currency" className={s.select} type="button" onClick={this.onButtonClick}>
         {this.props.currencies} {showModal ? <MdKeyboardArrowUp/> : <MdKeyboardArrowDown/>}
       </button>
       {showModal && (<div className={s.options}>

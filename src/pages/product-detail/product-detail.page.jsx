@@ -44,10 +44,10 @@ class ProductPage extends Component {
     const {selectedAttribute, productId} = this.state;
     const {onSubmit} = this.props;
     if(this.state.product.attributes.length > 0) {
-      if (selectedAttribute.length < 1) {
-        alert("No attributes have been selected");
+      if (selectedAttribute.length < this.state.product.attributes.length ) {
+        alert("Please select all attributes");
       }
-      if (selectedAttribute.length > 0) {
+      if (selectedAttribute.length === this.state.product.attributes.length) {
         onSubmit({
           id: uuidv4(), name: productId, attributes: [...selectedAttribute], value: 1,
         });
