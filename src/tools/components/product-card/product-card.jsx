@@ -6,8 +6,17 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import CardButton from "../card-button/card-button";
 import {v4 as uuidv4} from "uuid";
+import {withRouter} from "../../libraries/withRouter";
 
 class ProductCard extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      hovered: false,
+    }
+  }
+
   onButtonRedirect = (item) => {
     this.props.navigate(`/products/${item.id}`);
   };
@@ -21,8 +30,9 @@ class ProductCard extends Component {
 
   render() {
     const {item, currencies} = this.props;
+    const {hovered} = this.state;
 
-    return (<li className={s.item}>
+    return (<li className={s.item} onMouseLeave={() => this.setState({hovered: false})} onMouseEnter={() => this.setState({hovered: true})}>
         <Link
           className={s.link}
           to={{
@@ -37,7 +47,7 @@ class ProductCard extends Component {
             {item.prices.map((cur) => cur.currency === currencies && `${cur.currency} ${cur.amount}`)}
           </p>
         </Link>
-        {item.inStock && (<CardButton
+        {item.inStock && hovered && (<CardButton
             item={item}
             onButtonClick={item.attributes.length === 0 ? this.onCartButtonClick : () => this.onButtonRedirect(item)}
           />)}
@@ -55,4 +65,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 //withRouter not working in react-router v6
 //Had to create a custom withRouter components since hooks cannot be used in class based components
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductCard));

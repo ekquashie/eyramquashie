@@ -10,21 +10,22 @@ class ModalProductAttributes extends Component {
   };
 
   loading = false;
-  attrs = (e) => {
-    const {value} = e.target;
-    const {onSubmit} = this.props;
-    const inputIndex = e.target.dataset.index
-    let newAttributes = [...this.state.selectedAttributes]
-    newAttributes[inputIndex] = value;
-    this.setState({selectedAttributes: newAttributes})
-    onSubmit({
-      id: this.props.id, attributes: [...newAttributes]
-    });
-  };
+  // attrs = (e) => {
+  //   const {value} = e.target;
+  //   const {onSubmit} = this.props;
+  //   const inputIndex = e.target.dataset.index
+  //   let newAttributes = [...this.state.selectedAttributes]
+  //   newAttributes[inputIndex] = value;
+  //   this.setState({selectedAttributes: newAttributes})
+  //   onSubmit({
+  //     id: this.props.id, attributes: [...newAttributes]
+  //   });
+  // };
 
   render() {
     const {name, inStock, attributes} = this.props.product;
     const {selectedAttributes} = this.state;
+    console.log(this.props.product);
 
     return (<div>{attributes?.map((attr, index) => {
       return (<div key={attr.name + name + "modal" + index} className={s.attributes}>
@@ -34,7 +35,7 @@ class ModalProductAttributes extends Component {
             const key = uuidv4();
             return (<div key={item.value} className={s.attributesForm}>
               <input
-                onChange={this.attrs}
+                onChange={() => null}
                 className={s.attrButton}
                 id={key}
                 data-index={index}

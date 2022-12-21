@@ -15,9 +15,9 @@
 
 .selectImage {
   display: block;
-  width: 79px;
-  height: 80px;
-  object-fit: cover;
+  width: 90px;
+  aspect-ratio: 1;
+  object-fit: contain;
   cursor: pointer;
   transition: all 250ms;
 }
