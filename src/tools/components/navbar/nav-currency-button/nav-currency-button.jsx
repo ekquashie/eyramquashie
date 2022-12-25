@@ -13,9 +13,17 @@ class NavCurrencyButton extends Component {
   };
 
   componentDidMount() {
+    window.addEventListener("keydown", this.handleCloseModal);
+    window.addEventListener("click", this.handleCloseModal);
     currenciesRequest().then((response) => {
       this.setState({currencies: response.data.currencies});
     })
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this.handleCloseModal);
+    window.removeEventListener("click", this.handleCloseModal);
+
   }
 
   onButtonClick = () => {
@@ -29,6 +37,14 @@ class NavCurrencyButton extends Component {
     this.setState({
       showModal: false,
     });
+  };
+
+  handleCloseModal = (e) => {
+    // if (e.key === "Escape" || e.target === e.currentTarget) {
+    //   this.setState({showModal: false});
+    // }
+    // console.log(e.path[0])
+    // this.setState({showModal: false});
   };
 
   render() {

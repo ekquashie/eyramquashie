@@ -3,11 +3,12 @@ import {
   addProduct, removeProduct, editAttribute, incrementValue, decrementValue,
 } from "./actions/product-action";
 import {changeCurrency} from "./actions/currency-action";
+import {setRoute} from "./actions/route-action";
 
 const initialState = {
   products: {
-    items: [], currencies: "$",
-  },
+    items: [], currencies: "$", routes: "all",
+  }
 };
 
 const productReducer = createReducer(initialState.products.items, (builder) => {
@@ -32,7 +33,7 @@ const productReducer = createReducer(initialState.products.items, (builder) => {
   });
   builder.addCase(editAttribute, (state, {payload}) => {
     const currentState = [...state];
-    console.log(current(state))
+    // console.log(current(state))
     // let currentStateToCompare = current(state).attributes.join(", ");
     // let payloadStateToCompare = payload.attributes.join(", ");
     const productIndex = state.findIndex((item) => {
@@ -67,8 +68,12 @@ const currencyReducer = createReducer(initialState.products.currencies, (builder
   builder.addCase(changeCurrency, (_, {payload}) => payload);
 });
 
+const routeReducer = createReducer(initialState.products.routes, (builder) => {
+  builder.addCase(setRoute, (_, {payload}) => payload);
+});
+
 const productsReducer = combineReducers({
-  items: productReducer, currencies: currencyReducer,
+  items: productReducer, currencies: currencyReducer, routes: routeReducer
 });
 
 export default productsReducer;

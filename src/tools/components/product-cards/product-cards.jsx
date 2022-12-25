@@ -23,16 +23,35 @@ class ProductCards extends Component {
     this.fetchData();
   }
 
+  componentDidUpdate(prevProps, _, snapshot) {
+    if(this.props.path !== prevProps.path) {
+      this.fetchData();
+    }
+  }
+
   fetchData = () => {
-    this.state.pageCategory === "all" || this.state.pageCategory === "" ? allProductsRequest().then((result) => {
-      this.setState({data: result.data})
-    }).finally(() => {
-      this.setState({loading: false})
-    }) : productsCategoriesRequest().then((result) => {
-      this.setState({data: result.data})
-    }).finally(() => {
-      this.setState({loading: false})
-    })
+    if(this.props.path === "all" || this.props.path=== "") {
+      allProductsRequest().then((result) => {
+        this.setState({data: result.data})
+      }).finally(() => {
+        this.setState({loading: false})
+      });
+    } else {
+      productsCategoriesRequest().then((result) => {
+        this.setState({data: result.data})
+      }).finally(() => {
+        this.setState({loading: false})
+      })
+    }
+    // this.props.path === "all" || this.props.path=== "" ? allProductsRequest().then((result) => {
+    //   this.setState({data: result.data})
+    // }).finally(() => {
+    //   this.setState({loading: false})
+    // }) : productsCategoriesRequest().then((result) => {
+    //   this.setState({data: result.data})
+    // }).finally(() => {
+    //   this.setState({loading: false})
+    // })
   }
 
   onCartButtonClick = (e) => {
@@ -49,14 +68,18 @@ class ProductCards extends Component {
         {allCategories?.category ? (<CategoryList
           key={allCategories.category.name}
           category={allCategories.category}
-        />) : (allCategories?.categories?.map((category) => `${category.name}` === this.state.pageCategory && (
+        />) : (allCategories?.categories?.map((category) => `${category.name}` === this.props.path && (
           <CategoryList key={category.name} category={category}/>)))}
       </div>);
   }
 }
 
+const mapStateToProps = (state) => ({
+  path: state.products.routes,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (product) => dispatch(addProduct(product)),
 });
 
-export default connect(null, mapDispatchToProps)(ProductCards);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCards);
