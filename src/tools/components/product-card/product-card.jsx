@@ -44,7 +44,7 @@ class ProductCard extends Component {
 
       <p className={s.itemName}>{item.name}</p>
       <p className={s.price}>
-        {item.prices.map((cur) => cur.currency === currencies && `${cur.currency} ${cur.amount}`)}
+        {item.prices.map((cur) => cur.currency.symbol === currencies && `${cur.currency.symbol} ${cur.amount}`)}
       </p>
     </Link>
       {item.inStock && hovered && (<CardButton

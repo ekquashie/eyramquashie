@@ -7,8 +7,8 @@ import {setRoute} from "./actions/route-action";
 
 const initialState = {
   products: {
-    items: [], currencies: "$", routes: "all",
-  }
+    items: [], currencies: "$", routes: "",
+  },
 };
 
 const productReducer = createReducer(initialState.products.items, (builder) => {
@@ -18,16 +18,6 @@ const productReducer = createReducer(initialState.products.items, (builder) => {
       return item.name === payload.name
     });
     if (state.length !== 0) {
-      // let currentAttributes = current(state)[0]?.attributes.join(", ");
-      // let newAttributes = payload.attributes.join(", ");
-      // if (productIndex > -1 && currentAttributes === newAttributes) {
-      //   const newValue = state[productIndex].value + payload.value
-      //   const arr = [...state]
-      //   arr.splice(productIndex, 1)
-      //   return [...arr, {...payload, value: newValue}]
-      // } else {
-      //   return [...state, payload]
-      // }
       if(productIndex > -1) {
         //* get attributes of matching product in cart
         const currentAttributes = state[productIndex].attributes;

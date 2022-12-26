@@ -32,7 +32,7 @@ class NavCartModal extends Component {
 
     return createPortal(<div className={s.overlay} onClick={this.handleCloseModal}>
       <div
-        className={s.modal}
+        id="modal" className={s.modal}
         // style={{overflowY: products.length > 3 && "scroll"}}
       >
         <p className={s.title}>
