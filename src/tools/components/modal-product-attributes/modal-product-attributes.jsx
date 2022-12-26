@@ -33,9 +33,9 @@ class ModalProductAttributes extends Component {
                 id={key}
                 checked={checked}
                 type="radio"
-                name={attr.name + name + "modal" + this.props.index}
+                name={attr.name + name + this.props.index}
                 value={item.value}
-                disabled={!inStock || this.state.loading}
+                disabled={this.state.loading}
               />
               <label
                 className={attr.name === "Color" ? s.coloredLabel : s.attrLabel}
