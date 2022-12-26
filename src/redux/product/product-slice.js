@@ -52,18 +52,23 @@ const productReducer = createReducer(initialState.products.items, (builder) => {
   });
   builder.addCase(editAttribute, (state, {payload}) => {
     const currentState = [...state];
-
     const productIndex = state.findIndex((item) => {
       return item.id === payload.id;
     })
     if (productIndex > -1) {
       const newItem = {...currentState[productIndex], attributes: payload.attributes}
       currentState.splice(productIndex, 1, newItem);
-      return currentState
+      return currentState;
     }
   });
   builder.addCase(removeProduct, (state, {payload}) => {
-    return state.filter((product) => product.id !== payload);
+    const cartState = [...current(state)];
+    const productIndex = state.findIndex((product) => product.id === payload)
+    if(productIndex > -1) {
+      cartState.splice(productIndex, 1);
+    }
+    console.log(cartState);
+    return cartState;
   });
   builder.addCase(incrementValue, (state, {payload}) => {
     return state.map((product) => {
