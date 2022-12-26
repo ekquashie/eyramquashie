@@ -40,7 +40,6 @@
     background-color: #ffffff;
     color: #292929;
     border: 1px solid #a6a6a6;
-    cursor: pointer;
 }
 
 /* Checked */
@@ -68,7 +67,6 @@
     width: 24px;
     height: 24px;
     border: 1px solid #a6a6a6;
-    cursor: pointer;
 }
 
 .attrButton:checked + .coloredLabel {

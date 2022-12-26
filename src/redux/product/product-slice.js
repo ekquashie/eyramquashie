@@ -13,18 +13,46 @@ const initialState = {
 
 const productReducer = createReducer(initialState.products.items, (builder) => {
   builder.addCase(addProduct, (state, {payload}) => {
-    console.log(payload)
+    //get index of existing product in cart
     const productIndex = state.findIndex((item) => {
       return item.name === payload.name
     });
     if (state.length !== 0) {
-      let currentAttributes = current(state)[0]?.attributes.join(", ");
-      let newAttributes = payload.attributes.join(", ");
-      if (productIndex > -1 && currentAttributes === newAttributes) {
-        const newValue = state[productIndex].value + payload.value
-        const arr = [...state]
-        arr.splice(productIndex, 1)
-        return [...arr, {...payload, value: newValue}]
+      // let currentAttributes = current(state)[0]?.attributes.join(", ");
+      // let newAttributes = payload.attributes.join(", ");
+      // if (productIndex > -1 && currentAttributes === newAttributes) {
+      //   const newValue = state[productIndex].value + payload.value
+      //   const arr = [...state]
+      //   arr.splice(productIndex, 1)
+      //   return [...arr, {...payload, value: newValue}]
+      // } else {
+      //   return [...state, payload]
+      // }
+      if(productIndex > -1) {
+        //* get attributes of matching product in cart
+        const currentAttributes = state[productIndex].attributes;
+        //* get attributes of product to be added to cart
+        const newAttributes = payload.attributes;
+        //* loop through product in cart attribute and compare both attributes
+        // for (const key in currentAttributes) {
+        //   if (currentAttributes.hasOwnProperty(key)) {
+        //     if (!newAttributes.hasOwnProperty(key) || currentAttributes[key] !== newAttributes[key]) {
+        //       //set isMatch to false if they do not have the same key-value pairs
+        //       isMatch = false
+        //       break;
+        //     }
+        //   }
+        // }
+        if (JSON.stringify(currentAttributes) === JSON.stringify(newAttributes)) {
+          //* update quantity of product if key-value pairs of both attributes match
+          const newValue = current(state)[productIndex].value + 1;
+          const cartState = [...current(state)];
+          cartState.splice(productIndex, 1)
+          return [...cartState, {...payload, value: newValue}]
+        } else {
+          //* add product to cart if key-value pairs of attributes don't match
+          return [...state, payload]
+        }
       } else {
         return [...state, payload]
       }
