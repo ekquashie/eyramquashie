@@ -4,6 +4,7 @@ import {v4 as uuidv4} from "uuid";
 import {addProduct} from "../../../redux/product/actions/product-action";
 import {allProductsRequest, productsCategoriesRequest} from "../../services/gql-services";
 import CategoryList from "../category-list/category-list";
+import {setRoute} from "../../../redux/product/actions/route-action";
 
 class ProductCards extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class ProductCards extends Component {
   }
 
   fetchData = () => {
-    if(this.props.path === "all" || this.props.path=== "") {
+    if(this.props.path === "all") {
       allProductsRequest().then((result) => {
         this.setState({data: result.data})
       }).finally(() => {

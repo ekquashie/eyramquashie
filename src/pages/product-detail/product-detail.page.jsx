@@ -10,7 +10,7 @@ import {productRequest} from "../../tools/services/gql-services";
 
 class ProductPage extends Component {
   state = {
-    product: {}, productId: "", selectImage: null, isShowMore: false, selectedAttribute: [],
+    product: {}, productId: "", selectImage: null, isShowMore: false, selectedAttribute: {},
   };
 
   componentDidMount() {
@@ -35,8 +35,12 @@ class ProductPage extends Component {
   };
 
   setActiveAttribute = (attrs) => {
-    const filtered = attrs.filter((attr) => attr !== "");
-    this.setState({selectedAttribute: [...filtered]});
+    for(let key in attrs) {
+      if(attrs[key] === "") {
+        delete attrs[key]
+      }
+    }
+    this.setState({selectedAttribute: {...attrs}});
   };
 
   onSubmitProduct = (e) => {
@@ -44,18 +48,18 @@ class ProductPage extends Component {
     const {selectedAttribute, productId} = this.state;
     const {onSubmit} = this.props;
     if(this.state.product.attributes.length > 0) {
-      if (selectedAttribute.length < this.state.product.attributes.length ) {
+      if (Object.keys(selectedAttribute).length < this.state.product.attributes.length ) {
         alert("Please select all attributes");
       }
-      if (selectedAttribute.length === this.state.product.attributes.length) {
+      if (Object.keys(selectedAttribute).length === this.state.product.attributes.length) {
         onSubmit({
-          id: uuidv4(), name: productId, attributes: [...selectedAttribute], value: 1,
+          id: uuidv4(), name: productId, attributes: {...selectedAttribute}, value: 1,
         });
         alert("Product added to cart")
       }
     } else {
       onSubmit({
-        id: uuidv4(), name: productId, attributes: [...selectedAttribute], value: 1,
+        id: uuidv4(), name: productId, attributes: {...selectedAttribute}, value: 1,
       });
       alert("Product added to cart")
     }

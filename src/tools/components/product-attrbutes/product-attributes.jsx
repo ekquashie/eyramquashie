@@ -4,7 +4,7 @@ import s from "./product-attributes.module.css";
 
 class ProductAttributes extends Component {
   state = {
-    color: "", size: "", capacity: "", withPorts: "", withTouch: "", attrs: [], loading: false
+    color: "", size: "", capacity: "", withusb3ports: "", touchidinkeyboard: "", attrs: [], loading: false
   };
 
   loading = false;
@@ -22,17 +22,17 @@ class ProductAttributes extends Component {
       this.setState({capacity: value});
     }
     if (name === "With USB 3 ports") {
-      this.setState({withPorts: value});
+      this.setState({withusb3ports: value});
     }
     if (name === "Touch ID in keyboard") {
-      this.setState({withTouch: value});
+      this.setState({touchidinkeyboard: value});
     }
 
     setTimeout(() => {
-      const {color, size, capacity, withPorts, withTouch} = this.state;
+      const {color, size, capacity, withusb3ports, touchidinkeyboard} = this.state;
 
-      const onAttributesClick = this.props.onAttributesClick;
-      onAttributesClick([capacity, color, size, withPorts, withTouch]);
+      const {onAttributesClick} = this.props;
+      onAttributesClick({color, size, capacity, withusb3ports, touchidinkeyboard});
       this.setState({loading: this.loading})
     }, 100)
 

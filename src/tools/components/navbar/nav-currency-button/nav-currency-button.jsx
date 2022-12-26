@@ -5,28 +5,25 @@ import {changeCurrency} from "../../../../redux/product/actions/currency-action"
 import {currenciesRequest} from "../../../services/gql-services";
 import {MdKeyboardArrowDown, MdKeyboardArrowUp} from "react-icons/md";
 
-const currencyRoot = document.querySelector("#modal-root");
-
 class NavCurrencyButton extends Component {
   state = {
     showModal: false, currencies: [],
   };
 
   componentDidMount() {
-    window.addEventListener("keydown", this.handleCloseModal);
-    window.addEventListener("click", this.handleCloseModal);
+    window.addEventListener("click", this.handleClose);
     currenciesRequest().then((response) => {
       this.setState({currencies: response.data.currencies});
     })
   }
 
-  componentWillUnmount() {
-    window.removeEventListener("keydown", this.handleCloseModal);
-    window.removeEventListener("click", this.handleCloseModal);
-
+  handleClose = (e) => {
+    if(e.path.every((el) => el.id !== "currency")){
+      this.setState({showModal: false});
+    }
   }
 
-  onButtonClick = () => {
+  onModalClose = () => {
     this.setState((prev) => {
       return {showModal: !prev.showModal};
     });
@@ -39,18 +36,10 @@ class NavCurrencyButton extends Component {
     });
   };
 
-  handleCloseModal = (e) => {
-    // if (e.key === "Escape" || e.target === e.currentTarget) {
-    //   this.setState({showModal: false});
-    // }
-    // console.log(e.path[0])
-    // this.setState({showModal: false});
-  };
-
   render() {
     const {showModal, currencies} = this.state;
     return (<div>
-      <button id="currency" className={s.select} type="button" onClick={this.onButtonClick}>
+      <button id="currency" className={s.select} onClick={this.onModalClose} type="button">
         {this.props.currencies} {showModal ? <MdKeyboardArrowUp/> : <MdKeyboardArrowDown/>}
       </button>
       {showModal && (<div className={s.options}>

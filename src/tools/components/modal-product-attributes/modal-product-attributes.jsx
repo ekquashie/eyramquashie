@@ -3,24 +3,12 @@ import {v4 as uuidv4} from "uuid";
 import s from "./modal-product-attributes.module.css";
 import {connect} from "react-redux";
 import {editAttribute} from "../../../redux/product/actions/product-action";
+import {removeSpace} from "../../libraries/easy";
 
 class ModalProductAttributes extends Component {
   state = {
-    color: "", size: "", capacity: "", withPorts: "", withTouch: "", attrs: [], loading: false, selectedAttributes: this.props.selectedAttributes
+    selectedAttributes: this.props.selectedAttributes
   };
-
-  loading = false;
-  // attrs = (e) => {
-  //   const {value} = e.target;
-  //   const {onSubmit} = this.props;
-  //   const inputIndex = e.target.dataset.index
-  //   let newAttributes = [...this.state.selectedAttributes]
-  //   newAttributes[inputIndex] = value;
-  //   this.setState({selectedAttributes: newAttributes})
-  //   onSubmit({
-  //     id: this.props.id, attributes: [...newAttributes]
-  //   });
-  // };
 
   render() {
     const {name, inStock, attributes} = this.props.product;
@@ -31,14 +19,19 @@ class ModalProductAttributes extends Component {
         <h2 className={s.attributesTitle}>{attr.name.toUpperCase()}:</h2>
         <div className={s.attributesList}>
           {attr.items.map((item) => {
+            let checked = false;
+            for (let key in selectedAttributes) {
+              if (key === removeSpace(attr.name).toLowerCase() && item.value === selectedAttributes[key]) {
+                checked = true;
+              }
+            }
             const key = uuidv4();
             return (<div key={item.value} className={s.attributesForm}>
               <input
                 onChange={() => null}
                 className={s.attrButton}
                 id={key}
-                data-index={index}
-                checked={selectedAttributes.includes(item.value)}
+                checked={checked}
                 type="radio"
                 name={attr.name + name + "modal" + this.props.index}
                 value={item.value}
