@@ -50,7 +50,7 @@ class TotalCounter extends Component {
           arr.push(items[0])
         }
       })}
-      <p className={s.cartTotalQuantity}>
+      <p className={s.cartTax}>
         <span>Tax 21%:</span>
         <span className={s.cartTotalPrice}>
           {currency}{((Math.round(this.cartTotalCount(arr) * 100) / 100 || 0) * 0.21).toFixed(2)}
