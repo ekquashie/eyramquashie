@@ -11,12 +11,19 @@ class NavCurrencyButton extends Component {
   };
 
   componentDidMount() {
+    window.addEventListener("click", this.handleClose);
     currenciesRequest().then((response) => {
       this.setState({currencies: response.data.currencies});
     })
   }
 
-  onButtonClick = () => {
+  handleClose = (e) => {
+    if(e.path.every((el) => el.id !== "currency")){
+      this.setState({showModal: false});
+    }
+  }
+
+  onModalClose = () => {
     this.setState((prev) => {
       return {showModal: !prev.showModal};
     });
@@ -32,7 +39,7 @@ class NavCurrencyButton extends Component {
   render() {
     const {showModal, currencies} = this.state;
     return (<div>
-      <button className={s.select} type="button" onClick={this.onButtonClick}>
+      <button id="currency" className={s.select} onClick={this.onModalClose} type="button">
         {this.props.currencies} {showModal ? <MdKeyboardArrowUp/> : <MdKeyboardArrowDown/>}
       </button>
       {showModal && (<div className={s.options}>

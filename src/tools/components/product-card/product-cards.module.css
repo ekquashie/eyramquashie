@@ -31,7 +31,7 @@
   margin: 0 auto 24px;
   width: 354px;
   height: 330px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .imageBlur {

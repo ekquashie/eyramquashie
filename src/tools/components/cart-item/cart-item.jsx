@@ -37,7 +37,7 @@ export default class CartItem extends Component {
                   (price) =>
                     price.currency.symbol === currencies &&
                     `${price.currency.symbol} ${
-                      Math.round(price.amount * item.value * 100) / 100
+                      price.amount
                     } `
                 )}
               </p>

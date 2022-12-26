@@ -3,13 +3,21 @@ import s from "./product-cards.module.css";
 import {changeCurrency} from "../../../redux/product/actions/currency-action";
 import {addProduct} from "../../../redux/product/actions/product-action";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import CardButton from "../card-button/card-button";
 import {v4 as uuidv4} from "uuid";
 
 class ProductCard extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      hovered: false, route: false, productUrl: "",
+    }
+  }
+
   onButtonRedirect = (item) => {
-    this.props.navigate(`/products/${item.id}`);
+    this.setState({route: true, productUrl: `/products/${item.id}`})
   };
 
   onCartButtonClick = (e) => {
@@ -21,27 +29,29 @@ class ProductCard extends Component {
 
   render() {
     const {item, currencies} = this.props;
+    const {hovered, route, productUrl} = this.state;
 
-    return (<li className={s.item}>
-        <Link
-          className={s.link}
-          to={{
-            pathname: `/products/${item.id}`,
-          }}
-        >
-          <img className={s.image} src={item?.gallery[0]} alt="name"/>
-          {!item?.inStock && <p className={s.imageBlur}>OUT OF STOCK</p>}
+    return (<li className={s.item} onMouseLeave={() => this.setState({hovered: false})} onMouseEnter={() => this.setState({hovered: true})}>
+      {route && <Navigate to={productUrl} replace={true}/>}
+      <Link
+      className={s.link}
+      to={{
+        pathname: `/products/${item.id}`,
+      }}
+    >
+      <img className={s.image} src={item?.gallery[0]} alt="name"/>
+      {!item?.inStock && <p className={s.imageBlur}>OUT OF STOCK</p>}
 
-          <p className={s.itemName}>{item.name}</p>
-          <p className={s.price}>
-            {item.prices.map((cur) => cur.currency === currencies && `${cur.currency} ${cur.amount}`)}
-          </p>
-        </Link>
-        {item.inStock && (<CardButton
-            item={item}
-            onButtonClick={item.attributes.length === 0 ? this.onCartButtonClick : () => this.onButtonRedirect(item)}
-          />)}
-      </li>);
+      <p className={s.itemName}>{item.name}</p>
+      <p className={s.price}>
+        {item.prices.map((cur) => cur.currency.symbol === currencies && `${cur.currency.symbol} ${cur.amount}`)}
+      </p>
+    </Link>
+      {item.inStock && hovered && (<CardButton
+        item={item}
+        onButtonClick={item.attributes.length === 0 ? this.onCartButtonClick : () => this.onButtonRedirect(item)}
+      />)}
+    </li>);
   }
 }
 
@@ -53,6 +63,4 @@ const mapDispatchToProps = (dispatch) => ({
   onSubmit: (product) => dispatch(addProduct(product)),
 });
 
-//withRouter not working in react-router v6
-//Had to create a custom withRouter components since hooks cannot be used in class based components
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

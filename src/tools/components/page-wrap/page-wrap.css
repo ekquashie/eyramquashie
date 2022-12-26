@@ -39,6 +39,12 @@
 .navbar .menu-container .menu-item:hover::after {
   transform: scaleX(1);
 }
+
+.navbar .menu-container .active::after, .navbar .menu-container .active {
+  color: #5ece7b;
+  transform: scaleX(1);
+}
+
 .navbar .cart-container {
   display: flex;
   justify-content: center;

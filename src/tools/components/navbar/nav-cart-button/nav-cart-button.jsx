@@ -8,6 +8,15 @@ class NavCartButton extends Component {
   state = {
     showModal: false,
   };
+
+  componentDidMount() {
+    window.addEventListener("click", (e) => {
+      if(e.path.every((el) => el.id !== "cartModal" && el.id !== "modal")){
+        this.onModalClose();
+      }
+    });
+  }
+
   onIconClick = () => {
     this.setState((prev) => {
       return { showModal: !prev.showModal };
@@ -30,7 +39,7 @@ class NavCartButton extends Component {
     }
     return (
       <>
-        <button type="button" onClick={this.onIconClick} className={s.button}>
+        <button id="cartModal" type="button" onClick={this.onIconClick} className={s.button}>
           <CartIcon className={s.cartIcon} />
           {products.length > 0 && (
             <span className={s.productCount}>{products?.length}</span>

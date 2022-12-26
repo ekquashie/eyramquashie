@@ -6,17 +6,15 @@ export default class Category extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false
+      loading: false,
     }
   }
 
+
   render() {
-    const path = window.location.href.split('/', 4)[3]
-
-
     return (
       <section className={s.wrapper}>
-        <ProductCards pageCategory={path} />
+        <ProductCards/>
       </section>
     );
   }
