@@ -15,6 +15,9 @@ class PageWrap extends Component {
   };
 
   componentDidMount() {
+    if(window.location.pathname === "" || window.location.pathname === "/") {
+      this.props.onPathChange("")
+    }
     categoriesNameRequest().then((result) => {
       this.setState({categories: result.data.categories, category: result.data.category})
     })
