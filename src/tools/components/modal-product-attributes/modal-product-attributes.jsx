@@ -33,7 +33,7 @@ class ModalProductAttributes extends Component {
                 id={key}
                 checked={checked}
                 type="radio"
-                name={attr.name + name + this.props.index}
+                name={attr.name + name + "modal" + this.props.index}
                 value={item.value}
                 disabled={this.state.loading}
               />
