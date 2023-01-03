@@ -27,8 +27,6 @@
 }
 
 .selectedImage {
-  width: 800px;
-  height: 800px;
   object-fit: fill;
   margin-left: 10px;
   margin-right: 50px;
