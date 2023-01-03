@@ -1,4 +1,4 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import s from "./cart-item.module.css";
 import Counter from "../counter/counter";
 import {productAttributesRequest, productRequest} from "../../services/gql-services";

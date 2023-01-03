@@ -18,7 +18,7 @@ class NavCurrencyButton extends Component {
   }
 
   handleClose = (e) => {
-    if(e.path.every((el) => el.id !== "currency")){
+    if(e.composedPath().every((el) => el.id !== "currency")){
       this.setState({showModal: false});
     }
   }

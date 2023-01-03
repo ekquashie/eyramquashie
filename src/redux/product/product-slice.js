@@ -15,14 +15,14 @@ const productReducer = createReducer(initialState.products.items, (builder) => {
   builder.addCase(addProduct, (state, {payload}) => {
     //get index of existing product in cart
     const productIndex = state.findIndex((item) => {
-      return item.name === payload.name
+      return item.name === payload?.name
     });
     if (state.length !== 0) {
       if(productIndex > -1) {
         //* get attributes of matching product in cart
         const currentAttributes = state[productIndex].attributes;
         //* get attributes of product to be added to cart
-        const newAttributes = payload.attributes;
+        const newAttributes = payload?.attributes;
         //* loop through product in cart attribute and compare both attributes
         // for (const key in currentAttributes) {
         //   if (currentAttributes.hasOwnProperty(key)) {
@@ -53,10 +53,10 @@ const productReducer = createReducer(initialState.products.items, (builder) => {
   builder.addCase(editAttribute, (state, {payload}) => {
     const currentState = [...state];
     const productIndex = state.findIndex((item) => {
-      return item.id === payload.id;
+      return item.id === payload?.id;
     })
     if (productIndex > -1) {
-      const newItem = {...currentState[productIndex], attributes: payload.attributes}
+      const newItem = {...currentState[productIndex], attributes: payload?.attributes}
       currentState.splice(productIndex, 1, newItem);
       return currentState;
     }
@@ -67,20 +67,19 @@ const productReducer = createReducer(initialState.products.items, (builder) => {
     if(productIndex > -1) {
       cartState.splice(productIndex, 1);
     }
-    console.log(cartState);
     return cartState;
   });
   builder.addCase(incrementValue, (state, {payload}) => {
     return state.map((product) => {
-      return product.id === payload.id ? {
-        ...product, value: product.value + payload.value,
+      return product.id === payload?.id ? {
+        ...product, value: product.value + payload?.value,
       } : {...product};
     });
   });
   builder.addCase(decrementValue, (state, {payload}) => {
     return state.map((product) => {
-      return product.id === payload.id ? {
-        ...product, value: product.value - payload.value,
+      return product.id === payload?.id ? {
+        ...product, value: product.value - payload?.value,
       } : {...product};
     });
   });
