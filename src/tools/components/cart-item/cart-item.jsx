@@ -1,4 +1,4 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import s from "./cart-item.module.css";
 import Counter from "../counter/counter";
 import {productAttributesRequest, productRequest} from "../../services/gql-services";
@@ -22,20 +22,20 @@ export default class CartItem extends Component {
   }
 
   render() {
-    const {item, currencies, index} = this.props;
-    const {product, productWithAttributes} = this.state;
+    const {item, currency, index} = this.props;
+    const {product: {name, gallery, prices}, productWithAttributes} = this.state;
 
     return (
       <li id={item.id} className={s.item}>
-        {product.name && (
+        {name && (
           <div className={s.miniCard}>
             <div className={s.leftSide}>
-              <p className={s.itemName}>{product.name}</p>
+              <p className={s.itemName}>{name}</p>
               <p className={s.itemBrand}>{productWithAttributes.brand}</p>
               <p className={s.itemPrice}>
-                {product?.prices.map(
+                {prices.map(
                   (price) =>
-                    price.currency.symbol === currencies &&
+                    price.currency.symbol === currency &&
                     `${price.currency.symbol} ${
                       price.amount
                     } `
@@ -52,10 +52,10 @@ export default class CartItem extends Component {
             </div>
             <div className={s.rightSide}>
               <Counter pageSize id={item.id} value={item.value}/>
-              {product?.gallery?.length > 1 ? <Carousel product={product}/> : <img
+              {gallery && gallery?.length > 1 ? <Carousel gallery={gallery}/> : <img
                 className={s.itemImage}
-                src={product?.gallery[0]}
-                alt={product?.name}
+                src={gallery[0]}
+                alt={name}
               />}
             </div>
           </div>

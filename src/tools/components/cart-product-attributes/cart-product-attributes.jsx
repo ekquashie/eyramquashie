@@ -1,4 +1,4 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import {v4 as uuidv4} from "uuid";
 import s from "../product-attrbutes/product-attributes.module.css";
 import {editAttribute} from "../../../redux/product/actions/product-action";
@@ -60,7 +60,7 @@ class CartProductAttributes extends Component {
                 className={attr.name === "Color" ? s.coloredLabel : s.attrLabel}
                 htmlFor={key}
                 style={{
-                  backgroundColor: attr.name === "Color" && `${item.value}`,
+                  backgroundColor: attr.name === "Color" ? `${item.value}` : false,
                 }}
               >
                 {item.value}
@@ -73,8 +73,10 @@ class CartProductAttributes extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (product) => dispatch(editAttribute(product)),
-});
+const mapDispatchToProps = (dispatch) => {
+  return ({
+    onSubmit: (product) => dispatch(editAttribute(product)),
+  });
+};
 
 export default connect(null, mapDispatchToProps)(CartProductAttributes);

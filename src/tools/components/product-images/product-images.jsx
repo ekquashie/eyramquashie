@@ -1,7 +1,7 @@
-import { PureComponent } from "react";
+import { Component } from "react";
 import s from "./product-images.module.css";
 
-class ProductImages extends PureComponent {
+class ProductImages extends Component {
   render() {
     const { product, selectImage, onSelectImage } = this.props;
     return (

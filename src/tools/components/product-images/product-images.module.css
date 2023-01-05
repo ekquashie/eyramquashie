@@ -27,9 +27,9 @@
 }
 
 .selectedImage {
-  width: 800px;
-  height: 800px;
-  object-fit: fill;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
   margin-left: 10px;
-  margin-right: 50px;
+  margin-right: 20px;
 }

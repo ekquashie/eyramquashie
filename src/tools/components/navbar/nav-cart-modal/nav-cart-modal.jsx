@@ -28,7 +28,7 @@ class NavCartModal extends Component {
   };
 
   render() {
-    const {products, currencies, onCloseModal} = this.props;
+    const {products, currency, onCloseModal} = this.props;
 
     return createPortal(<div className={s.overlay} onClick={this.handleCloseModal}>
       <div
@@ -43,7 +43,7 @@ class NavCartModal extends Component {
         {products?.map((item, index) => {
           return <NavCartItem
             key={index}
-            currencies={currencies}
+            currency={currency}
             item={item}
             index={index}
           />
@@ -59,7 +59,7 @@ class NavCartModal extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  products: state.products.items, currencies: state.products.currencies,
+  products: state.products.items, currency: state.products.currencies,
 });
 
 export default connect(mapStateToProps)(NavCartModal);

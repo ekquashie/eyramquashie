@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import s from "./total-counter.module.css";
-import {Component} from "react";
+import React, {Component} from "react";
 import {pricesRequest} from "../../services/gql-services";
 
 class TotalCounter extends Component {

@@ -8,24 +8,24 @@ class Carousel extends Component {
   }
 
   incrementIndex = () => {
-    return this.setState({slideIndex: this.state.slideIndex > this.props.product?.gallery?.length - 2 ? 0 : this.state.slideIndex + 1})
+    return this.setState({slideIndex: this.state.slideIndex > this.props.gallery?.length - 2 ? 0 : this.state.slideIndex + 1})
   };
 
   decrementIndex = () => {
-    return this.setState({slideIndex: this.state.slideIndex === 0 ? this.props.product?.gallery?.length - 1 : this.state.slideIndex - 1})
+    return this.setState({slideIndex: this.state.slideIndex === 0 ? this.props.gallery?.length - 1 : this.state.slideIndex - 1})
   };
 
   render() {
     const {slideIndex} = this.state;
-    const {product} = this.props;
+    const {gallery} = this.props;
     return (
       <div className={s.carouselContainer}>
-        {product?.gallery?.map((image, index) => {
+        {gallery?.map((image, index) => {
           return <img
             key={image}
             className={index === slideIndex ? s.itemImage : s.itemImageHidden}
-            src={product?.gallery[index]}
-            alt={product.name}
+            src={gallery[index]}
+            alt={image}
           />
         })}
         <div className={s.carouselButtonContainer}>

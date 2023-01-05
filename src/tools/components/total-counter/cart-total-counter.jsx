@@ -1,4 +1,4 @@
-import {connect} from "react-redux";
+import React, {connect} from "react-redux";
 import s from "./cart-total-counter.module.css";
 import {Component} from "react";
 import {pricesRequest} from "../../services/gql-services";

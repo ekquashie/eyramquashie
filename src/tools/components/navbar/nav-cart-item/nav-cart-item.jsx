@@ -22,7 +22,7 @@ export default class NavCartItem extends Component {
   }
 
   render() {
-    const {currencies, item, index} = this.props;
+    const {currency, item, index} = this.props;
     const {product, productWithAttributes} = this.state;
 
     if (!product?.name) return <div>Loading...</div>
@@ -34,7 +34,7 @@ export default class NavCartItem extends Component {
         <p className={s.itemPrice}>
           {product?.prices.map(
             (price) =>
-              price.currency.symbol === currencies &&
+              price.currency.symbol === currency &&
               `${price.currency.symbol} ${
                 price.amount
                 // Math.round(price.amount * item.value * 100) / 100

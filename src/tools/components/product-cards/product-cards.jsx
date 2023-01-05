@@ -1,37 +1,37 @@
 import {Component} from "react";
 import {connect} from "react-redux";
-import {v4 as uuidv4} from "uuid";
 import {addProduct} from "../../../redux/product/actions/product-action";
 import {allProductsRequest, productsCategoriesRequest} from "../../services/gql-services";
 import CategoryList from "../category-list/category-list";
-import {setRoute} from "../../../redux/product/actions/route-action";
 
 class ProductCards extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pageCategory: this.props.pageCategory, data: {}, loading: true
+      data: {}, loading: true
     }
   }
 
   changeCategory = (category) => (category ? category : null);
 
-  onCategoryButtonClick = (e) => {
-    this.setState({category: e.target.textContent});
-  };
+  // onCategoryButtonClick = (e) => {
+  //   this.setState({category: e.target.textContent});
+  // };
 
   componentDidMount() {
     this.fetchData();
   }
 
   componentDidUpdate(prevProps, _, snapshot) {
-    if(this.props.path !== prevProps.path) {
+    const {path} = this.props;
+    if(path !== prevProps.path) {
       this.fetchData();
     }
   }
 
   fetchData = () => {
-    if(this.props.path === "all") {
+    const {path} = this.props;
+    if(path === "all") {
       allProductsRequest().then((result) => {
         this.setState({data: result.data})
       }).finally(() => {
@@ -55,21 +55,22 @@ class ProductCards extends Component {
     // })
   }
 
-  onCartButtonClick = (e) => {
-    e.preventDefault();
-    this.props.onSubmit({
-      id: uuidv4(), name: e.target.id, attributes: [], value: 1,
-    });
-  };
+  // onCartButtonClick = (e) => {
+  //   e.preventDefault();
+  //   this.props.onSubmit({
+  //     id: uuidv4(), name: e.target.id, attributes: [], value: 1,
+  //   });
+  // };
 
   render() {
+    const {path} = this.props;
     if (this.state.loading) return <div>Loading...</div>
     const allCategories = this.changeCategory(this.state.data);
     return (<div>
         {allCategories?.category ? (<CategoryList
           key={allCategories.category.name}
           category={allCategories.category}
-        />) : (allCategories?.categories?.map((category) => `${category.name}` === this.props.path && (
+        />) : (allCategories?.categories?.map((category) => `${category.name}` === path && (
           <CategoryList key={category.name} category={category}/>)))}
       </div>);
   }
