@@ -18,7 +18,7 @@ class NavCurrencyButton extends Component {
   }
 
   handleClose = (e) => {
-    if(e.composedPath().every((el) => el.id !== "currency")){
+    if(e.path.every((el) => el.id !== "currency")){
       this.setState({showModal: false});
     }
   }
@@ -30,7 +30,8 @@ class NavCurrencyButton extends Component {
   };
 
   selectCurrency = (currency) => {
-    this.props.onChangeCurrency(currency.symbol);
+    const {onChangeCurrency} = this.props;
+    onChangeCurrency(currency.symbol);
     this.setState({
       showModal: false,
     });
@@ -38,9 +39,10 @@ class NavCurrencyButton extends Component {
 
   render() {
     const {showModal, currencies} = this.state;
+    const {currency} = this.props;
     return (<div>
       <button id="currency" className={s.select} onClick={this.onModalClose} type="button">
-        {this.props.currencies} {showModal ? <MdKeyboardArrowUp/> : <MdKeyboardArrowDown/>}
+        {currency} {showModal ? <MdKeyboardArrowUp/> : <MdKeyboardArrowDown/>}
       </button>
       {showModal && (<div className={s.options}>
         {currencies.map((currency, index) => {
@@ -59,7 +61,7 @@ class NavCurrencyButton extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  currencies: state.products.currencies,
+  currency: state.products.currencies,
 });
 const mapDispatchToProps = (dispatch) => ({
   onChangeCurrency: (currency) => dispatch(changeCurrency(currency)),

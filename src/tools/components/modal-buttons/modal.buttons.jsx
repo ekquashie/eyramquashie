@@ -1,17 +1,15 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import s from "./modal-buttons.module.css";
+import {URLS} from "../../../constants/route-links";
 
 class ModalButtons extends Component {
   render() {
-    const { onCloseModal, location} = this.props;
+    const { onCloseModal} = this.props;
     return (
       <div className={s.buttons}>
         <Link
-          to={{
-            pathname: "/cart",
-            state: { from: location },
-          }}
+          to={URLS.cart.url}
         >
           <button className={s.buttonLink} onClick={onCloseModal}>
             VIEW BAG

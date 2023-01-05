@@ -15,8 +15,9 @@ class PageWrap extends Component {
   };
 
   componentDidMount() {
-    if(window.location.pathname === "" || window.location.pathname === "/") {
-      this.props.onPathChange("")
+    const {onPathChange} = this.props;
+    if (window.location.pathname === "" || window.location.pathname === "/") {
+      onPathChange("");
     }
     categoriesNameRequest().then((result) => {
       this.setState({categories: result.data.categories, category: result.data.category})
@@ -24,18 +25,18 @@ class PageWrap extends Component {
   }
 
   render() {
+    const {onPathChange} = this.props;
     return (<div>
       <nav className="navbar">
         <div className="menu-container">
           {this.state.categories.map((item) => {
             return (<NavLink
-              // reloadDocument={false}
               key={item.name}
-              to={item.name}
-              className={({ isActive }) =>
+              to={item.name !== "all" ? item.name : ""}
+              className={({isActive}) =>
                 isActive ? "active menu-item" : "menu-item"
               }
-              onClick={() => this.props.onPathChange(item.name)}
+              onClick={() => onPathChange(item.name)}
             >
               {item.name}
             </NavLink>);
@@ -56,8 +57,10 @@ class PageWrap extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onPathChange: (path) => dispatch(setRoute(path)),
-});
+const mapDispatchToProps = (dispatch) => {
+  return ({
+    onPathChange: (path) => dispatch(setRoute(path)),
+  })
+};
 
 export default connect(null, mapDispatchToProps)(PageWrap);

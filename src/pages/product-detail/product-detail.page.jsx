@@ -55,13 +55,13 @@ class ProductPage extends Component {
         onSubmit({
           id: uuidv4(), name: productId, attributes: {...selectedAttribute}, value: 1,
         });
-        alert("Product added to cart")
+        alert("Product added to cart");
       }
     } else {
       onSubmit({
         id: uuidv4(), name: productId, attributes: {...selectedAttribute}, value: 1,
       });
-      alert("Product added to cart")
+      alert("Product added to cart");
     }
 
   };
@@ -69,6 +69,7 @@ class ProductPage extends Component {
   render() {
     const {product, selectImage, isShowMore} = this.state;
     const {currency} = this.props;
+    const {inStock} = product;
 
     if (this.state.loading) return <p>Loading...</p>;
 
@@ -92,10 +93,10 @@ class ProductPage extends Component {
         <button
           type="button"
           onClick={this.onSubmitProduct}
-          disabled={!product.inStock && true}
+          disabled={!inStock && true}
           className={s.submitBtn}
         >
-          {!product.inStock ? "OUT OF STOCK" : "ADD TO CART"}
+          {!inStock ? "OUT OF STOCK" : "ADD TO CART"}
         </button>
         {product.description && (!isShowMore && product.description.length > 300 ? (<div className={s.description}>
           {parse(product.description?.slice(0, 300) + "...")}

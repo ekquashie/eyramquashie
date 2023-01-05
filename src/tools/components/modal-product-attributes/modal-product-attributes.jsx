@@ -11,7 +11,7 @@ class ModalProductAttributes extends Component {
   };
 
   render() {
-    const {name, inStock, attributes} = this.props.product;
+    const {name, attributes} = this.props.product;
     const {selectedAttributes} = this.state;
 
     return (<div>{attributes?.map((attr, index) => {
@@ -41,7 +41,7 @@ class ModalProductAttributes extends Component {
                 className={attr.name === "Color" ? s.coloredLabel : s.attrLabel}
                 htmlFor={key}
                 style={{
-                  backgroundColor: attr.name === "Color" && `${item.value}`,
+                  backgroundColor: attr.name === "Color" ? `${item.value}` : false,
                 }}
               >
                 {item.value}

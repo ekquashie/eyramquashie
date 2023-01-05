@@ -7,7 +7,7 @@ export default class CategoryList extends Component {
     const category = this.props.category;
 
     return (
-      <div className={s.wrapper}>
+      <div>
         <h2 className={s.title}>{category.name}</h2>
         <ul className={s.list}>
           {category?.products?.map((item) => {

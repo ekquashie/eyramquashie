@@ -8,3 +8,27 @@
   padding-bottom: 80px;
   color: #1d1f22;
 }
+
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10%;
+}
+
+.categoryCard {
+  width: 300px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  text-decoration: none;
+  color: black;
+  box-shadow: 5px 5px 10px lightgrey;
+}
+
+.categoryCard:hover {
+  transform: scale(1.15);
+  transition: 0.2s ease-in-out;
+}

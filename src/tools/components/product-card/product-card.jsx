@@ -21,33 +21,36 @@ class ProductCard extends Component {
   };
 
   onCartButtonClick = (e) => {
+    const {onSubmit} = this.props;
     e.preventDefault();
-    this.props.onSubmit({
+    onSubmit({
       id: uuidv4(), name: e.target.id, attributes: [], value: 1,
     });
   };
 
   render() {
-    const {item, currencies} = this.props;
+    const {item, currency} = this.props;
     const {hovered, route, productUrl} = this.state;
+    const {inStock} = item;
 
-    return (<li className={s.item} onMouseLeave={() => this.setState({hovered: false})} onMouseEnter={() => this.setState({hovered: true})}>
+    return (<li className={s.item} onMouseLeave={() => this.setState({hovered: false})}
+                onMouseEnter={() => this.setState({hovered: true})}>
       {route && <Navigate to={productUrl} replace={true}/>}
       <Link
-      className={s.link}
-      to={{
-        pathname: `/products/${item.id}`,
-      }}
-    >
-      <img className={s.image} src={item?.gallery[0]} alt="name"/>
-      {!item?.inStock && <p className={s.imageBlur}>OUT OF STOCK</p>}
+        className={s.link}
+        to={{
+          pathname: `/products/${item.id}`,
+        }}
+      >
+        <img className={s.image} src={item?.gallery[0]} alt="name"/>
+        {!inStock && <p className={s.imageBlur}>OUT OF STOCK</p>}
 
-      <p className={s.itemName}>{item.name}</p>
-      <p className={s.price}>
-        {item.prices.map((cur) => cur.currency.symbol === currencies && `${cur.currency.symbol} ${cur.amount}`)}
-      </p>
-    </Link>
-      {item.inStock && hovered && (<CardButton
+        <p className={s.itemName}>{item.name}</p>
+        <p className={s.price}>
+          {item.prices.map((cur) => cur.currency.symbol === currency && `${cur.currency.symbol} ${cur.amount}`)}
+        </p>
+      </Link>
+      {inStock && hovered && (<CardButton
         item={item}
         onButtonClick={item.attributes.length === 0 ? this.onCartButtonClick : () => this.onButtonRedirect(item)}
       />)}
@@ -56,11 +59,13 @@ class ProductCard extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  currencies: state.products.currencies,
+  currency: state.products.currencies,
 });
-const mapDispatchToProps = (dispatch) => ({
-  onChangeCurrency: (currency) => dispatch(changeCurrency(currency)),
-  onSubmit: (product) => dispatch(addProduct(product)),
-});
+const mapDispatchToProps = (dispatch) => {
+  return ({
+    onChangeCurrency: (currency) => dispatch(changeCurrency(currency)),
+    onSubmit: (product) => dispatch(addProduct(product)),
+  })
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

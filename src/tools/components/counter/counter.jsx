@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, {Component} from "react";
+import {connect} from "react-redux";
 import {
   incrementValue,
   removeProduct,
@@ -9,16 +9,18 @@ import s from "./counter.module.css";
 
 class Counter extends Component {
   increment = (e) => {
+    const {increment} = this.props;
     if (e.target.id === this.props.id) {
-      return this.props.increment(1, this.props.id);
+      return increment(1, this.props.id);
     }
   };
 
   decrement = () => {
+    const {decrement} = this.props;
     if (this.props.value === 1) {
       this.props.removeProduct(this.props.id);
     }
-    return this.props.decrement(1, this.props.id);
+    return decrement(1, this.props.id);
   };
 
   render() {
@@ -46,10 +48,12 @@ class Counter extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  increment: (value, id) => dispatch(incrementValue({ value, id })),
-  decrement: (value, id) => dispatch(decrementValue({ value, id })),
-  removeProduct: (id) => dispatch(removeProduct(id)),
-});
+const mapDispatchToProps = (dispatch) => {
+  return ({
+    increment: (value, id) => dispatch(incrementValue({value, id})),
+    decrement: (value, id) => dispatch(decrementValue({value, id})),
+    removeProduct: (id) => dispatch(removeProduct(id)),
+  })
+};
 
 export default connect(null, mapDispatchToProps)(Counter);

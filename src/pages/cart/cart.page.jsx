@@ -6,7 +6,7 @@ import CartTotalCounter from "../../tools/components/total-counter/cart-total-co
 
 class Cart extends Component {
   render() {
-    const {products, currencies} = this.props;
+    const {products, currency} = this.props;
     return (
       <div>
         <h2 className={s.pageTitle}>CART</h2>
@@ -18,7 +18,7 @@ class Cart extends Component {
                   <CartItem
                     key={item.id}
                     item={item}
-                    currencies={currencies}
+                    currency={currency}
                     index={index}
                   />
                 );
@@ -39,7 +39,7 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => ({
   products: state.products.items,
-  currencies: state.products.currencies,
+  currency: state.products.currencies,
 });
 
 export default connect(mapStateToProps)(Cart);

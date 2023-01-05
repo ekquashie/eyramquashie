@@ -46,6 +46,7 @@ class ProductAttributes extends Component {
         <h2 className={s.attributesTitle}>{attr.name.toUpperCase()}:</h2>
         <div className={s.attributesList}>
           {attr.items.map((item) => {
+            const {displayValue} = item;
             const key = uuidv4();
             return (<div key={item.value} className={s.attributesForm}>
               <input
@@ -61,7 +62,7 @@ class ProductAttributes extends Component {
                 className={attr.name === "Color" ? s.coloredLabel : s.attrLabel}
                 htmlFor={key}
                 style={{
-                  backgroundColor: attr.name === "Color" && `${item.displayValue}`,
+                  backgroundColor: attr.name === "Color" ? `${displayValue}` : false,
                 }}
               >
                 {item.value}
